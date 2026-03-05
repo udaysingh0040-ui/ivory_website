@@ -13,6 +13,9 @@ whiteshirtcompany_ref_website.webp
 CLAUDE.md
 .claude/
 
+# Vercel CLI config (contains project IDs, not needed in repo)
+.vercel/
+
 # Dev tooling (optional — remove if you want these in the repo)
 screenshot.mjs
 
