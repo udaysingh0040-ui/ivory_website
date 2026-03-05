@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — IVORY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ebony: #131111;
+      --ivory-white: #FAFAF8;
+      --alabaster: #F0F0E8;
+      --warm-beige: #E8D5C0;
+      --soft-pearl: #EEECEA;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      background-color: var(--ivory-white);
+      color: var(--ebony);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { background: none; border: none; cursor: pointer; font-family: inherit; color: inherit; }
+
+    /* ── Grain Overlay ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background-color: var(--ivory-white);
+      border-bottom: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .nav__logo {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 44px;
+    }
+
+    .nav__links a {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      transition: opacity 0.25s ease;
+    }
+    .nav__links a:hover { opacity: 0.4; }
+    .nav__links a.active {
+      border-bottom: 1px solid var(--ebony);
+      padding-bottom: 2px;
+    }
+
+    .nav__right { display: flex; align-items: center; gap: 20px; }
+    .cart-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: opacity 0.2s ease;
+      color: var(--ebony);
+    }
+    .cart-link:hover { opacity: 0.5; }
+    .cart-link svg { width: 22px; height: 22px; }
+
+    .nav__cta {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.25s ease;
+    }
+    .nav__cta:hover { opacity: 0.4; }
+    .nav__cta::after { content: '→'; font-weight: 300; font-size: 13px; }
+
+    .nav__brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav__brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--ebony);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* ── LABEL / BODY UTILITIES ───────────────────────────── */
+    .label-xs {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .label-sm {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .body-sm {
+      font-size: 12px;
+      line-height: 1.85;
+      color: rgba(19,17,17,0.62);
+      font-weight: 300;
+    }
+
+    /* ── ABOUT HERO ───────────────────────────────────────── */
+    .about-hero {
+      padding-top: 72px;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      min-height: 100vh;
+      background-color: var(--ivory-white);
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .about-hero__text {
+      padding: 56px 52px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .about-hero__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .about-hero__year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: rgba(19,17,17,0.32);
+    }
+
+    .about-hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(62px, 9vw, 124px);
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--ebony);
+      padding: 40px 0;
+    }
+
+    .about-hero__title .light { font-weight: 300; display: block; }
+    .about-hero__title .italic { font-style: italic; font-weight: 300; display: block; }
+    .about-hero__title .bold { font-weight: 700; display: block; }
+
+    .about-hero__desc {
+      max-width: 360px;
+      margin-bottom: 24px;
+    }
+
+    .about-hero__bottom {
+      border-top: 1px solid rgba(19,17,17,0.09);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .about-hero__scroll {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.35);
+    }
+
+    .about-hero__image {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-hero__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(100%);
+      display: block;
+    }
+
+    /* ── OUR BEGINNING ────────────────────────────────────── */
+    .beginning {
+      padding: 96px 48px;
+      background-color: var(--ivory-white);
+    }
+
+    .beginning__header {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      margin-bottom: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+      align-items: start;
+    }
+
+    .beginning__quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 3.2vw, 44px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.22;
+      letter-spacing: -0.01em;
+      color: var(--ebony);
+    }
+
+    .beginning__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 260px;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .beginning__col p + p {
+      margin-top: 16px;
+    }
+
+    .beginning__img {
+      overflow: hidden;
+    }
+
+    .beginning__img img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(100%);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .beginning__img:hover img { transform: scale(1.03); }
+
+    /* ── OUR PHILOSOPHY (dark) ────────────────────────────── */
+    .philosophy {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 96px 48px;
+    }
+
+    .philosophy .label-sm {
+      color: rgba(250,250,248,0.38);
+    }
+
+    .philosophy__intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.8vw, 38px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.28;
+      max-width: 680px;
+      color: rgba(250,250,248,0.82);
+      margin-bottom: 72px;
+      margin-top: 4px;
+    }
+
+    .philosophy__pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(250,250,248,0.1);
+      border-bottom: 1px solid rgba(250,250,248,0.1);
+      margin-bottom: 56px;
+    }
+
+    .philosophy__pillar {
+      padding: 44px 44px 44px 0;
+    }
+
+    .philosophy__pillar + .philosophy__pillar {
+      padding-left: 44px;
+      border-left: 1px solid rgba(250,250,248,0.1);
+    }
+
+    .philosophy__pillar:last-child {
+      padding-right: 0;
+    }
+
+    .philosophy__num {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      color: rgba(250,250,248,0.28);
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    .philosophy__pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(19px, 2.2vw, 28px);
+      font-weight: 500;
+      line-height: 1.12;
+      margin-bottom: 16px;
+      color: var(--ivory-white);
+    }
+
+    .philosophy__pillar-body {
+      font-size: 11.5px;
+      line-height: 1.9;
+      color: rgba(250,250,248,0.5);
+      font-weight: 300;
+    }
+
+    .philosophy__images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .philosophy__images img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      opacity: 0.45;
+      display: block;
+    }
+
+    /* ── WHAT IT MEANS FOR YOU ────────────────────────────── */
+    .means {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: var(--alabaster);
+    }
+
+    .means__img {
+      overflow: hidden;
+    }
+
+    .means__img img {
+      width: 100%;
+      height: 100%;
+      min-height: 640px;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(100%);
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .means__img:hover img { transform: scale(1.02); }
+
+    .means__content {
+      padding: 88px 64px;
+    }
+
+    .means__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 2.8vw, 38px);
+      font-weight: 400;
+      line-height: 1.18;
+      margin-bottom: 48px;
+      margin-top: 14px;
+    }
+
+    .means__list {
+      margin-bottom: 44px;
+    }
+
+    .means__item {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .means__item:first-child {
+      border-top: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .means__item-num {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      color: rgba(19,17,17,0.28);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .means__item-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 1.5vw, 19px);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+
+    /* ── OUR APPROACH ─────────────────────────────────────── */
+    .approach {
+      padding: 96px 48px;
+      background-color: var(--ivory-white);
+    }
+
+    .approach__header {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 0;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .approach__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.6vw, 48px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .approach__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0;
+    }
+
+    .approach__item {
+      padding: 44px 44px 44px 0;
+      border-right: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .approach__item:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .approach__item:not(:first-child) {
+      padding-left: 44px;
+    }
+
+    .approach__num {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      color: rgba(19,17,17,0.28);
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .approach__item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .approach__closing {
+      margin-top: 56px;
+      max-width: 500px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(19,17,17,0.09);
+    }
+
+    /* ── CLOSING (dark) ───────────────────────────────────── */
+    .closing {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 580px;
+      padding: 100px 48px;
+    }
+
+    .closing__side-img {
+      position: absolute;
+      bottom: 0;
+      width: 22%;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+
+    .closing__side-img--left { left: 0; }
+    .closing__side-img--right { right: 0; }
+
+    .closing__side-img img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .closing__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .closing__eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.35);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .closing__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 7.5vw, 102px);
+      font-weight: 700;
+      line-height: 0.93;
+      letter-spacing: -0.025em;
+    }
+
+    .closing__rule {
+      width: 36px;
+      height: 1px;
+      background: rgba(250,250,248,0.3);
+      margin: 40px auto;
+    }
+
+    .closing__welcome {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+    }
+
+    /* ── TICKER ───────────────────────────────────────────── */
+    .ticker {
+      background-color: var(--ebony);
+      overflow: hidden;
+      padding: 13px 0;
+      border-top: 1px solid rgba(250,250,248,0.1);
+    }
+
+    .ticker__inner {
+      display: flex;
+      animation: ticker-scroll 28s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker__item {
+      font-size: 10.5px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.65);
+      padding: 0 36px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .ticker__dot {
+      width: 3px;
+      height: 3px;
+      background: rgba(250,250,248,0.4);
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    .footer {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 56px 48px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      border-top: 1px solid rgba(250,250,248,0.07);
+    }
+
+    .footer__col-title {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.38);
+      margin-bottom: 22px;
+    }
+
+    .footer__stores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .footer__link {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      color: rgba(250,250,248,0.72);
+      line-height: 1.7;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .footer__link:hover { color: var(--ivory-white); }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── SCROLL FADE ──────────────────────────────────────── */
+    .fade-up.will-animate {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__brand-wrap">
+      <img src="brand_assets/ivory_logo_transparent.png" alt="IVORY" class="nav__logo">
+      <span class="nav__brand-name">IVORY</span>
+    </a>
+    <div class="nav__links">
+      <a href="about.html" class="active">About</a>
+      <a href="collection.html">Collection</a>
+      <a href="fabrics.html">Fabrics</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="nav__right">
+      <a href="catalogue.html" class="cart-link" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ─── ABOUT HERO ─────────────────────────────────── -->
+    <section class="about-hero">
+      <div class="about-hero__text">
+        <div class="about-hero__top">
+          <span class="label-xs">About Us</span>
+          <span class="about-hero__year">Est. 2022</span>
+        </div>
+
+        <h1 class="about-hero__title">
+          <span class="light">We chose</span>
+          <span class="italic">restraint.</span>
+          <span class="light">We chose</span>
+          <span class="bold">white.</span>
+        </h1>
+
+        <div>
+          <p class="body-sm about-hero__desc">Founded on a simple belief: essentials deserve intention. In a world overwhelmed by trends, excess, and constant reinvention — we chose clarity.</p>
+          <div class="about-hero__bottom">
+            <span class="about-hero__scroll">↓ Scroll to explore</span>
+            <span class="label-xs" style="margin-bottom:0; color:rgba(19,17,17,0.35);">Heritage S/S 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-hero__image">
+        <img src="website photos/860a73d46aa42e28de284ce55721c31c.jpg" alt="IVORY Campaign">
+      </div>
+    </section>
+
+    <!-- ─── OUR BEGINNING ─────────────────────────────── -->
+    <section class="beginning fade-up">
+      <div class="beginning__header">
+        <span class="label-sm">Our Beginning</span>
+        <p class="beginning__quote">"White is not merely a colour. It is discipline. It is structure. It is confidence without noise."</p>
+      </div>
+      <div class="beginning__body">
+        <div class="beginning__col">
+          <p class="body-sm">IVORY was founded on a simple belief: essentials deserve intention.</p>
+          <p class="body-sm">In a world overwhelmed by trends, excess, and constant reinvention, we chose restraint. We chose clarity. We chose white.</p>
+        </div>
+        <div class="beginning__col">
+          <p class="body-sm">IVORY was created to refine the garments you wear most — elevating everyday essentials through precision, quality, and modern design.</p>
+          <p class="body-sm">We do not chase trends. We refine the standard.</p>
+        </div>
+        <div class="beginning__img">
+          <img src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="IVORY Heritage">
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── OUR PHILOSOPHY (dark) ─────────────────────── -->
+    <section class="philosophy">
+      <span class="label-sm">Our Philosophy</span>
+      <p class="philosophy__intro">We believe that simplicity is powerful. Minimal is not basic — it is deliberate.</p>
+      <div class="philosophy__pillars">
+        <div class="philosophy__pillar">
+          <span class="philosophy__num">01</span>
+          <h3 class="philosophy__pillar-title">Fabric<br>Considered</h3>
+          <p class="philosophy__pillar-body">That fabric should feel considered. Every material chosen with intention — for texture, weight, and lasting presence on the body.</p>
+        </div>
+        <div class="philosophy__pillar">
+          <span class="philosophy__num">02</span>
+          <h3 class="philosophy__pillar-title">Fit Defines<br>Presence</h3>
+          <p class="philosophy__pillar-body">That fit defines presence. Modern proportions that command a room without demanding attention — structure through restraint.</p>
+        </div>
+        <div class="philosophy__pillar">
+          <span class="philosophy__num">03</span>
+          <h3 class="philosophy__pillar-title">Restraint<br>Signals Strength</h3>
+          <p class="philosophy__pillar-body">That restraint signals strength. Nothing excessive. Nothing distracting. Every IVORY piece is a study in the power of less.</p>
+        </div>
+      </div>
+      <div class="philosophy__images">
+        <img src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="">
+        <img src="website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ─── WHAT IT MEANS FOR YOU ──────────────────────── -->
+    <section class="means fade-up">
+      <div class="means__img">
+        <img src="website photos/f9c5a469226837f8ff50932539c2dc54.jpg" alt="IVORY Look">
+      </div>
+      <div class="means__content">
+        <span class="label-sm">What It Means For You</span>
+        <h2 class="means__title">When you wear IVORY, you wear more than white.</h2>
+        <div class="means__list">
+          <div class="means__item">
+            <span class="means__item-num">01</span>
+            <span class="means__item-text">Confidence without loud branding</span>
+          </div>
+          <div class="means__item">
+            <span class="means__item-num">02</span>
+            <span class="means__item-text">Structure in a chaotic world</span>
+          </div>
+          <div class="means__item">
+            <span class="means__item-num">03</span>
+            <span class="means__item-text">Elevated essentials built to last</span>
+          </div>
+          <div class="means__item">
+            <span class="means__item-num">04</span>
+            <span class="means__item-text">Modern tailoring designed for everyday authority</span>
+          </div>
+        </div>
+        <p class="body-sm">IVORY is for those who value clarity over noise, discipline over excess, and presence over performance. Our garments integrate seamlessly — and stand confidently on their own.</p>
+      </div>
+    </section>
+
+    <!-- ─── OUR APPROACH ───────────────────────────────── -->
+    <section class="approach fade-up">
+      <div class="approach__header">
+        <span class="label-sm">Our Approach</span>
+        <h2 class="approach__title">We focus on what matters.</h2>
+      </div>
+      <div class="approach__grid">
+        <div class="approach__item">
+          <span class="approach__num">01</span>
+          <h3 class="approach__item-title">Premium Materials</h3>
+          <p class="body-sm">Sourced for texture, weight, and longevity. Only what belongs on the body — nothing more, nothing less.</p>
+        </div>
+        <div class="approach__item">
+          <span class="approach__num">02</span>
+          <h3 class="approach__item-title">Modern Structured Fits</h3>
+          <p class="body-sm">Clean proportions that move with confidence. Silhouettes designed to stand on their own, season after season.</p>
+        </div>
+        <div class="approach__item">
+          <span class="approach__num">03</span>
+          <h3 class="approach__item-title">Clean Construction</h3>
+          <p class="body-sm">Precision stitching, considered finishes, and quiet detailing. Built to outlast the moment it was made for.</p>
+        </div>
+        <div class="approach__item">
+          <span class="approach__num">04</span>
+          <h3 class="approach__item-title">Timeless Design Language</h3>
+          <p class="body-sm">Every piece remains relevant beyond trends. Because essentials should never feel ordinary — they should feel inevitable.</p>
+        </div>
+      </div>
+      <p class="approach__closing body-sm">Every piece is created to outlast seasonal cycles and remain relevant beyond trends. Because essentials should never feel ordinary.</p>
+    </section>
+
+    <!-- ─── CLOSING STATEMENT ──────────────────────────── -->
+    <section class="closing">
+      <div class="closing__side-img closing__side-img--left">
+        <img src="website photos/faf8e2bd7be07e7dc46df7e8938cd409.jpg" alt="">
+      </div>
+      <div class="closing__content">
+        <span class="closing__eyebrow">The Standard Going Forward</span>
+        <h2 class="closing__title">
+          IVORY is not<br>
+          seasonal.<br>
+          It is structural.
+        </h2>
+        <div class="closing__rule"></div>
+        <p class="closing__welcome">Welcome to IVORY.</p>
+      </div>
+      <div class="closing__side-img closing__side-img--right">
+        <img src="website photos/b776d7041bf124ca81d3f664eb61adf3.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ─── TICKER ─────────────────────────────────────── -->
+    <div class="ticker">
+      <div class="ticker__inner">
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ────────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div>
+      <p class="footer__col-title">Stores</p>
+      <div class="footer__stores">
+        <a href="#" class="footer__link">Mumbai</a>
+        <a href="#" class="footer__link">Delhi</a>
+        <a href="#" class="footer__link">Bangalore</a>
+        <a href="#" class="footer__link">Milan</a>
+        <a href="#" class="footer__link">Paris</a>
+        <a href="#" class="footer__link">London</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Follow Us</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">YouTube</a>
+        <a href="#" class="footer__link">Twitter</a>
+        <a href="#" class="footer__link">Pinterest</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Contact</p>
+      <div class="footer__links">
+        <a href="mailto:info@ivory.com" class="footer__link">info@ivory.com</a>
+        <a href="mailto:press@ivory.com" class="footer__link">press@ivory.com</a>
+        <a href="mailto:showroom@ivory.com" class="footer__link">showroom@ivory.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll fade-in ──────────────────────────────────────
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('will-animate'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

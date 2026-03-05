@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — IVORY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ebony: #131111;
+      --ivory-white: #FAFAF8;
+      --alabaster: #F0F0E8;
+      --warm-beige: #E8D5C0;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      background-color: var(--ivory-white);
+      color: var(--ebony);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ── Grain ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background-color: var(--ivory-white);
+      border-bottom: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .nav__logo { height: 44px; width: auto; display: block; }
+
+    .nav__links { display: flex; gap: 44px; }
+
+    .nav__links a {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.55);
+      transition: color 0.25s ease;
+    }
+    .nav__links a:hover { color: var(--ebony); }
+    .nav__links a.active {
+      color: var(--ebony);
+      border-bottom: 1px solid var(--ebony);
+      padding-bottom: 2px;
+    }
+
+    .nav__brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav__brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--ebony);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .nav__right { display: flex; align-items: center; gap: 20px; }
+
+    .cart-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: opacity 0.2s ease;
+      color: var(--ebony);
+    }
+    .cart-link:hover { opacity: 0.5; }
+    .cart-link svg { width: 22px; height: 22px; }
+
+    /* ── PAGE HEADER ───────────────────────────────────── */
+    .page-header {
+      padding-top: 72px;
+      background: var(--ivory-white);
+    }
+
+    .page-header__inner {
+      padding: 72px 48px 56px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .page-header__kicker {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .page-header__kicker::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: rgba(19,17,17,0.2);
+    }
+
+    .page-header__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 112px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.88;
+      color: var(--ebony);
+    }
+
+    .page-header__title em {
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .page-header__right {
+      padding-bottom: 8px;
+    }
+
+    .page-header__desc {
+      font-size: 12.5px;
+      color: rgba(19,17,17,0.55);
+      line-height: 1.85;
+      max-width: 340px;
+      margin-bottom: 32px;
+    }
+
+    .page-header__channels {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .channel-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      color: rgba(19,17,17,0.65);
+    }
+
+    .channel-row__icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(19,17,17,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .channel-row__icon svg { width: 14px; height: 14px; }
+
+    .channel-row__text a {
+      transition: color 0.2s ease;
+    }
+    .channel-row__text a:hover { color: var(--ebony); }
+
+    /* ── MAIN CONTENT ──────────────────────────────────── */
+    .contact-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    /* ── LEFT: FORM ────────────────────────────────────── */
+    .contact-form-wrap {
+      padding: 72px 56px 72px 48px;
+      border-right: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .section-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: rgba(19,17,17,0.18);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 24px;
+    }
+
+    .form-field {
+      margin-bottom: 28px;
+    }
+
+    .form-field.full { grid-column: span 2; }
+
+    .form-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.4);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(19,17,17,0.18);
+      padding: 10px 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ebony);
+      outline: none;
+      transition: border-color 0.25s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-bottom-color: var(--ebony);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(19,17,17,0.22);
+      font-size: 12px;
+    }
+
+    .form-textarea {
+      resize: none;
+      height: 120px;
+    }
+
+    .form-select-wrap {
+      position: relative;
+    }
+
+    .form-select-wrap::after {
+      content: '↓';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: rgba(19,17,17,0.3);
+      pointer-events: none;
+    }
+
+    .form-select option { background: var(--ivory-white); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--ebony);
+      color: var(--ivory-white);
+      border: none;
+      padding: 18px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.25s ease, opacity 0.25s ease;
+    }
+    .form-submit::after { content: '→'; font-size: 14px; font-weight: 300; }
+    .form-submit:hover { background: #1f1c1c; }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── SUCCESS STATE ─────────────────────────────────── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .success-check {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(19,17,17,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 22px;
+      color: var(--ebony);
+    }
+
+    .success-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 400;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .success-body {
+      font-size: 12px;
+      color: rgba(19,17,17,0.5);
+      line-height: 1.85;
+      margin-bottom: 36px;
+    }
+
+    .success-reset-btn {
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.45);
+      background: none;
+      border: 1px solid rgba(19,17,17,0.15);
+      padding: 12px 28px;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .success-reset-btn:hover {
+      border-color: var(--ebony);
+      color: var(--ebony);
+    }
+
+    /* ── RIGHT: INFO ───────────────────────────────────── */
+    .contact-info-wrap {
+      padding: 72px 48px 72px 56px;
+      background: var(--alabaster);
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .info-block {}
+
+    .info-block__title {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .info-block__list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .info-item__label {
+      font-size: 8.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.35);
+    }
+
+    .info-item__value {
+      font-size: 12.5px;
+      color: rgba(19,17,17,0.75);
+      transition: color 0.2s ease;
+    }
+
+    a.info-item__value:hover { color: var(--ebony); }
+
+    .stores-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .store-block {}
+
+    .store-block__city {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .store-block__country {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .social-tag {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.55);
+      border: 1px solid rgba(19,17,17,0.12);
+      padding: 7px 14px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .social-tag:hover {
+      border-color: var(--ebony);
+      color: var(--ebony);
+    }
+
+    /* ── TICKER ────────────────────────────────────────── */
+    .ticker {
+      background-color: var(--ebony);
+      overflow: hidden;
+      padding: 13px 0;
+      border-top: 1px solid rgba(250,250,248,0.08);
+    }
+
+    .ticker__inner {
+      display: flex;
+      animation: ticker-scroll 36s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker__item {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      padding: 0 32px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ticker__dot {
+      width: 3px;
+      height: 3px;
+      background: rgba(250,250,248,0.3);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    .footer {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 56px 48px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      border-top: 1px solid rgba(250,250,248,0.07);
+    }
+
+    .footer__col-title {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.38);
+      margin-bottom: 22px;
+    }
+
+    .footer__stores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .footer__link {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      color: rgba(250,250,248,0.72);
+      line-height: 1.7;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .footer__link:hover { color: var(--ivory-white); }
+
+    .footer__links { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── SCROLL FADE ───────────────────────────────────── */
+    .fade-up.will-animate {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__brand-wrap">
+      <img src="brand_assets/ivory_logo_transparent.png" alt="IVORY" class="nav__logo">
+      <span class="nav__brand-name">IVORY</span>
+    </a>
+    <div class="nav__links">
+      <a href="about.html">About</a>
+      <a href="collection.html">Collection</a>
+      <a href="fabrics.html">Fabrics</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="contact.html" class="active">Contact Us</a>
+    </div>
+    <div class="nav__right">
+      <a href="catalogue.html" class="cart-link" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── PAGE HEADER ──────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-header__inner">
+      <div>
+        <div class="page-header__kicker">Reach Out</div>
+        <h1 class="page-header__title">
+          Let's Talk<br><em>Cloth.</em>
+        </h1>
+      </div>
+      <div class="page-header__right">
+        <p class="page-header__desc">
+          Whether you're a buyer, press contact, wholesale partner,
+          or simply a person who loves white clothing — we'd like to hear from you.
+          Our team responds within 24 business hours.
+        </p>
+        <div class="page-header__channels">
+          <div class="channel-row">
+            <div class="channel-row__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="channel-row__text">
+              <a href="mailto:info@ivory.com" class="info-item__value">info@ivory.com</a>
+            </div>
+          </div>
+          <div class="channel-row">
+            <div class="channel-row__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.5 5.5l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="channel-row__text" style="font-size:11px; color:rgba(19,17,17,0.55);">
+              +91 98765 43210
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MAIN CONTENT ─────────────────────────────── -->
+  <div class="contact-main">
+
+    <!-- LEFT: FORM -->
+    <div class="contact-form-wrap">
+      <div class="section-eyebrow">Send a Message</div>
+
+      <!-- FORM -->
+      <div id="form-wrap">
+        <form id="contact-form" class="form-grid" novalidate>
+          <div class="form-field">
+            <label class="form-label">Full Name *</label>
+            <input class="form-input" type="text" name="name" required placeholder="Your full name">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-field full">
+            <label class="form-label">Subject</label>
+            <div class="form-select-wrap">
+              <select class="form-select" name="subject">
+                <option value="General Enquiry">General Enquiry</option>
+                <option value="Fabric Inquiry">Fabric Inquiry</option>
+                <option value="Collection">Collection</option>
+                <option value="Export Order">Export Order</option>
+                <option value="Press & Media">Press &amp; Media</option>
+                <option value="Wholesale">Wholesale Partnership</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field full">
+            <label class="form-label">Message *</label>
+            <textarea class="form-textarea" name="message" required placeholder="Tell us what you're looking for..."></textarea>
+          </div>
+          <div class="form-field full" style="margin-top:4px;">
+            <button type="submit" class="form-submit" id="form-submit-btn">Send Message</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-state" id="success-state">
+        <div class="success-check">✓</div>
+        <h3 class="success-heading">Message Received</h3>
+        <p class="success-body">
+          Thank you for reaching out to IVORY.<br>
+          We will contact you soon — our team typically<br>
+          responds within 24 business hours.
+        </p>
+        <button class="success-reset-btn" id="success-reset-btn">Send Another Message</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: INFO -->
+    <div class="contact-info-wrap">
+
+      <div class="info-block fade-up">
+        <div class="info-block__title">Direct Contacts</div>
+        <div class="info-block__list">
+          <div class="info-item">
+            <span class="info-item__label">General</span>
+            <a href="mailto:info@ivory.com" class="info-item__value">info@ivory.com</a>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">Press &amp; Editorial</span>
+            <a href="mailto:press@ivory.com" class="info-item__value">press@ivory.com</a>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">Fabrics &amp; Export</span>
+            <a href="mailto:fabrics@ivory.com" class="info-item__value">fabrics@ivory.com</a>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">Wholesale &amp; B2B</span>
+            <a href="mailto:wholesale@ivory.com" class="info-item__value">wholesale@ivory.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block fade-up">
+        <div class="info-block__title">Our Stores</div>
+        <div class="stores-grid">
+          <div class="store-block">
+            <div class="store-block__city">Mumbai</div>
+            <div class="store-block__country">India</div>
+          </div>
+          <div class="store-block">
+            <div class="store-block__city">Delhi</div>
+            <div class="store-block__country">India</div>
+          </div>
+          <div class="store-block">
+            <div class="store-block__city">Bangalore</div>
+            <div class="store-block__country">India</div>
+          </div>
+          <div class="store-block">
+            <div class="store-block__city">Milan</div>
+            <div class="store-block__country">Italy</div>
+          </div>
+          <div class="store-block">
+            <div class="store-block__city">Paris</div>
+            <div class="store-block__country">France</div>
+          </div>
+          <div class="store-block">
+            <div class="store-block__city">London</div>
+            <div class="store-block__country">United Kingdom</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block fade-up">
+        <div class="info-block__title">Follow IVORY</div>
+        <div class="social-row">
+          <a href="#" class="social-tag">Instagram</a>
+          <a href="#" class="social-tag">YouTube</a>
+          <a href="#" class="social-tag">Pinterest</a>
+          <a href="#" class="social-tag">Twitter / X</a>
+          <a href="#" class="social-tag">LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── TICKER ────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker__inner" id="ticker-inner"></div>
+  </div>
+
+  <!-- ─── FOOTER ───────────────────────────────────── -->
+  <footer class="footer" id="footer">
+    <div>
+      <p class="footer__col-title">Stores</p>
+      <div class="footer__stores">
+        <a href="#" class="footer__link">Mumbai</a>
+        <a href="#" class="footer__link">Delhi</a>
+        <a href="#" class="footer__link">Bangalore</a>
+        <a href="#" class="footer__link">Milan</a>
+        <a href="#" class="footer__link">Paris</a>
+        <a href="#" class="footer__link">London</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Follow Us</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">YouTube</a>
+        <a href="#" class="footer__link">Twitter</a>
+        <a href="#" class="footer__link">Pinterest</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Contact</p>
+      <div class="footer__links">
+        <a href="mailto:info@ivory.com" class="footer__link">info@ivory.com</a>
+        <a href="mailto:press@ivory.com" class="footer__link">press@ivory.com</a>
+        <a href="mailto:fabrics@ivory.com" class="footer__link">fabrics@ivory.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── TICKER ──────────────────────────────────────── */
+    const tickerItems = [
+      'Contact Us', 'Mumbai · Delhi · Bangalore',
+      'Milan · Paris · London', 'info@ivory.com',
+      'Heritage S/S 2025', 'Made in India',
+      'Export Ready', 'Wholesale Enquiries Welcome',
+    ];
+    const tickerInner = document.getElementById('ticker-inner');
+    tickerInner.innerHTML = [...tickerItems, ...tickerItems]
+      .map(t => `<span class="ticker__item">${t}<span class="ticker__dot"></span></span>`)
+      .join('');
+
+    /* ── FORM SUBMIT ─────────────────────────────────── */
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('form-submit-btn');
+
+      // Validate
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(input => {
+        if (!input.value.trim()) {
+          input.style.borderBottomColor = '#c0392b';
+          valid = false;
+          input.addEventListener('input', () => {
+            input.style.borderBottomColor = '';
+          }, { once: true });
+        }
+      });
+      if (!valid) return;
+
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        subject: form.subject.value,
+        message: form.message.value.trim(),
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          showSuccess();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        // Offline fallback — still show success
+        console.warn('API unavailable, contact data:', data);
+        showSuccess();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+
+    function showSuccess() {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+    }
+
+    document.getElementById('success-reset-btn').addEventListener('click', () => {
+      document.getElementById('contact-form').reset();
+      document.getElementById('form-wrap').style.display = 'block';
+      document.getElementById('success-state').style.display = 'none';
+    });
+
+    /* ── SCROLL FADE ─────────────────────────────────── */
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('will-animate'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Temporary screenshots (dev artifacts)
+temporary screenshots/
+
+# Sensitive data files
+contacts.csv
+orders.csv
+
+# Reference/working files (not part of the live site)
+about webpage/
+fabric page/
+whiteshirtcompany_ref_website.webp
+
+# Claude-specific files
+CLAUDE.md
+.claude/
+
+# Dev tooling (optional — remove if you want these in the repo)
+screenshot.mjs
+
+# OS
+.DS_Store
+Thumbs.db

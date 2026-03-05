@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVORY — Heritage S/S 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ebony: #131111;
+      --ivory-white: #FAFAF8;
+      --alabaster: #F0F0E8;
+      --warm-beige: #E8D5C0;
+      --soft-pearl: #EEECEA;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      background-color: var(--ivory-white);
+      color: var(--ebony);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { background: none; border: none; cursor: pointer; font-family: inherit; color: inherit; }
+
+    /* ── Grain Overlay ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background-color: var(--ivory-white);
+      border-bottom: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .nav__logo {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 44px;
+    }
+
+    .nav__links a {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      transition: opacity 0.25s ease;
+    }
+    .nav__links a:hover { opacity: 0.4; }
+
+    .nav__right { display: flex; align-items: center; gap: 20px; }
+    .cart-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: opacity 0.2s ease;
+      color: var(--ebony);
+    }
+    .cart-link:hover { opacity: 0.5; }
+    .cart-link svg { width: 22px; height: 22px; }
+
+    .nav__cta {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.25s ease;
+    }
+    .nav__cta:hover { opacity: 0.4; }
+    .nav__cta::after { content: '→'; font-weight: 300; font-size: 13px; }
+
+    .nav__brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav__brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--ebony);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      padding-top: 72px;
+      background-color: var(--ivory-white);
+      position: relative;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(60px, 10.5vw, 158px);
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--ebony);
+      padding: 20px 48px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero__body {
+      display: grid;
+      grid-template-columns: 210px 1fr 1fr 240px;
+      gap: 0;
+      margin-top: -32px;
+      position: relative;
+      align-items: stretch;
+    }
+
+    .hero__left-text {
+      padding: 0 0 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      z-index: 3;
+    }
+
+    .hero__center-image {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__center-image img {
+      width: 100%;
+      height: 620px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      display: block;
+    }
+
+    .hero__center-image-2 {
+      position: relative;
+      z-index: 1;
+      margin-top: 48px;
+    }
+
+    .hero__center-image-2 img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(100%);
+      display: block;
+    }
+
+    .hero__right-text {
+      padding: 40px 48px 0 28px;
+      z-index: 3;
+    }
+
+    .hero__info-bottom {
+      display: grid;
+      grid-template-columns: 200px 1fr 240px;
+      padding: 32px 48px;
+      border-top: 1px solid rgba(19,17,17,0.09);
+    }
+
+    /* ── LABEL / BODY UTILITIES ───────────────────────────── */
+    .label-xs {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .label-sm {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .heading-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .body-sm {
+      font-size: 12px;
+      line-height: 1.85;
+      color: rgba(19,17,17,0.62);
+      font-weight: 300;
+    }
+
+    /* ── DEEPER LOOK ──────────────────────────────────────── */
+    .deeper {
+      padding: 80px 48px;
+      background-color: var(--ivory-white);
+    }
+
+    .deeper__heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.8vw, 52px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      max-width: 640px;
+      margin-bottom: 52px;
+    }
+
+    .deeper__images {
+      display: grid;
+      grid-template-columns: 1.15fr 0.9fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .deeper__img-wrap {
+      overflow: hidden;
+    }
+
+    .deeper__img-wrap img {
+      width: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .deeper__img-wrap:hover img { transform: scale(1.03); }
+
+    .deeper__img-wrap:nth-child(1) img { height: 600px; }
+    .deeper__img-wrap:nth-child(2) { margin-top: 72px; }
+    .deeper__img-wrap:nth-child(2) img { height: 490px; }
+    .deeper__img-wrap:nth-child(3) { margin-top: 36px; }
+    .deeper__img-wrap:nth-child(3) img { height: 530px; }
+
+    .deeper__text-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(19,17,17,0.09);
+    }
+
+    /* ── EDITORIAL ────────────────────────────────────────── */
+    .editorial {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 96px 48px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+    }
+
+    .editorial__side-img {
+      position: absolute;
+      bottom: 0;
+      width: 21%;
+      filter: grayscale(100%);
+      opacity: 0.65;
+    }
+    .editorial__side-img--left { left: 0; }
+    .editorial__side-img--right { right: 0; }
+    .editorial__side-img img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .editorial__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 760px;
+    }
+
+    .editorial__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 7.5vw, 100px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+    }
+
+    .editorial__side-caption {
+      position: absolute;
+      right: 22%;
+      bottom: 40px;
+      font-size: 11.5px;
+      line-height: 1.7;
+      max-width: 170px;
+      color: rgba(250,250,248,0.55);
+      text-align: left;
+    }
+
+    /* ── IMAGE STRIP ──────────────────────────────────────── */
+    .strip {
+      background-color: var(--ivory-white);
+      overflow: hidden;
+      padding: 0;
+      border-top: 1px solid rgba(19,17,17,0.07);
+      border-bottom: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .strip__inner {
+      display: flex;
+      animation: strip-scroll 40s linear infinite;
+      width: max-content;
+    }
+
+    .strip__img {
+      width: 138px;
+      height: 196px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      flex-shrink: 0;
+      border-right: 3px solid var(--ivory-white);
+    }
+
+    @keyframes strip-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── ALL LOOKS ────────────────────────────────────────── */
+    .all-looks {
+      padding: 80px 48px;
+      background-color: var(--ivory-white);
+    }
+
+    .all-looks__heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.8vw, 34px);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    .all-looks__grid {
+      display: grid;
+      grid-template-columns: 210px 1fr 176px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .all-looks__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      padding-top: 4px;
+    }
+
+    .meta-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    .meta-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .all-looks__desc {
+      font-size: 11.5px;
+      line-height: 1.8;
+      color: rgba(19,17,17,0.58);
+      margin-top: 8px;
+    }
+
+    .all-looks__nav-row {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(19,17,17,0.5);
+    }
+
+    .all-looks__nav-row button {
+      font-size: 15px;
+      color: var(--ebony);
+      transition: opacity 0.2s;
+      padding: 2px 0;
+    }
+    .all-looks__nav-row button:hover { opacity: 0.4; }
+
+    .all-looks__main-img {
+      overflow: hidden;
+    }
+    .all-looks__main-img img {
+      width: 100%;
+      height: 680px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .all-looks__main-img:hover img { transform: scale(1.02); }
+
+    .all-looks__thumbs {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .all-looks__thumb {
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .all-looks__thumb img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: opacity 0.25s ease, transform 0.4s ease;
+    }
+    .all-looks__thumb:hover img { opacity: 0.72; transform: scale(1.03); }
+    .all-looks__thumb.active img { opacity: 1; outline: 1px solid var(--ebony); }
+
+    /* ── PREVIOUS COLLECTIONS ─────────────────────────────── */
+    .previous {
+      padding: 80px 48px;
+      background-color: var(--alabaster);
+    }
+
+    .previous__heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.8vw, 34px);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .previous__track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 4px;
+    }
+    .previous__track::-webkit-scrollbar { display: none; }
+
+    .previous__card {
+      flex: 0 0 auto;
+      width: 255px;
+      cursor: pointer;
+    }
+
+    .previous__card-imgwrap {
+      overflow: hidden;
+    }
+    .previous__card-imgwrap img {
+      width: 100%;
+      height: 336px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .previous__card:hover .previous__card-imgwrap img { transform: scale(1.04); }
+
+    .previous__card-info {
+      padding: 14px 0 0;
+    }
+
+    .previous__card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .previous__card-season {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: rgba(19,17,17,0.48);
+      margin-top: 4px;
+    }
+
+    .previous__pagination {
+      margin-top: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(19,17,17,0.48);
+    }
+
+    .previous__pagination button {
+      font-size: 15px;
+      color: var(--ebony);
+      transition: opacity 0.2s;
+    }
+    .previous__pagination button:hover { opacity: 0.4; }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    .cta-section {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 360px;
+      padding: 80px 48px;
+    }
+
+    .cta-section__side-img {
+      position: absolute;
+      bottom: 0;
+      width: 260px;
+      filter: grayscale(100%);
+      opacity: 0.58;
+    }
+    .cta-section__side-img--left { left: 0; }
+    .cta-section__side-img--right { right: 0; }
+    .cta-section__side-img img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+    }
+
+    .cta-section__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .cta-section__link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      transition: opacity 0.25s ease;
+      color: var(--ivory-white);
+    }
+    .cta-section__link:hover { opacity: 0.65; }
+
+    .cta-section__arrow {
+      font-weight: 200;
+      transition: transform 0.3s ease;
+    }
+    .cta-section__link:hover .cta-section__arrow { transform: translateX(6px); }
+
+    /* ── TICKER ───────────────────────────────────────────── */
+    .ticker {
+      background-color: var(--ebony);
+      overflow: hidden;
+      padding: 13px 0;
+      border-top: 1px solid rgba(250,250,248,0.1);
+    }
+
+    .ticker__inner {
+      display: flex;
+      animation: ticker-scroll 28s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker__item {
+      font-size: 10.5px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.65);
+      padding: 0 36px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .ticker__dot {
+      width: 3px;
+      height: 3px;
+      background: rgba(250,250,248,0.4);
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    .footer {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 56px 48px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      border-top: 1px solid rgba(250,250,248,0.07);
+    }
+
+    .footer__col-title {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.38);
+      margin-bottom: 22px;
+    }
+
+    .footer__stores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .footer__link {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      color: rgba(250,250,248,0.72);
+      line-height: 1.7;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .footer__link:hover { color: var(--ivory-white); }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── SCROLL FADE ──────────────────────────────────────── */
+    /* Elements start visible; JS adds .will-animate class to prep animation */
+    .fade-up.will-animate {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="/" class="nav__brand-wrap">
+      <img src="brand_assets/ivory_logo_transparent.png" alt="IVORY" class="nav__logo">
+      <span class="nav__brand-name">IVORY</span>
+    </a>
+    <div class="nav__links">
+      <a href="about.html">About</a>
+      <a href="collection.html">Collection</a>
+      <a href="fabrics.html">Fabrics</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="nav__right">
+      <a href="catalogue.html" class="cart-link" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ─── HERO ─────────────────────────────────────── -->
+    <section class="hero" id="about">
+      <h1 class="hero__title">IVORY<br>HERITAGE</h1>
+      <div class="hero__body">
+        <div class="hero__left-text">
+          <span class="label-sm">Our Campaign</span>
+          <p class="body-sm">At IVORY, white is not a colour—it is a philosophy. Every garment we craft exists in the pure, the pristine, and the precise. A brand devoted entirely to white clothing.</p>
+        </div>
+        <div class="hero__center-image">
+          <img src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="Heritage Campaign S/S 2025">
+        </div>
+        <div class="hero__center-image-2">
+          <img src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="Heritage Campaign S/S 2025">
+        </div>
+        <div class="hero__right-text">
+          <span class="label-sm">Spring / Summer 2025</span>
+          <p class="heading-display">Heritage</p>
+          <p class="body-sm">Our debut collection channels the timeless power of white—clean silhouettes, natural fibres, and effortless drape that defines the modern wardrobe.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── DEEPER LOOK ───────────────────────────────── -->
+    <section class="deeper fade-up" id="collection">
+      <h2 class="deeper__heading">A Deeper Look Inside the Collection</h2>
+      <div class="deeper__images">
+        <div class="deeper__img-wrap">
+          <img src="website photos/dc9423509aef9ee91e6ba440bd472698.jpg" alt="Look 1">
+        </div>
+        <div class="deeper__img-wrap">
+          <img src="website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg" alt="Look 2">
+        </div>
+        <div class="deeper__img-wrap">
+          <img src="website photos/f9c5a469226837f8ff50932539c2dc54.jpg" alt="Look 3">
+        </div>
+      </div>
+      <div class="deeper__text-row">
+        <div>
+          <span class="label-sm">Highlights</span>
+          <p class="body-sm">Heritage features relaxed-fit shirts in 100% cotton and linen, wide-leg trousers, and oversized blazers—all rendered exclusively in white. Each piece is a study in restraint and precision.</p>
+        </div>
+        <div></div>
+        <div>
+          <span class="label-sm">Design Philosophy</span>
+          <p class="body-sm">IVORY was founded on one belief: white clothing is the highest form of dressing. Heritage explores every texture, cut, and silhouette within that singular, unwavering vision.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── EDITORIAL STATEMENT ───────────────────────── -->
+    <section class="editorial">
+      <div class="editorial__side-img editorial__side-img--left">
+        <img src="website photos/860a73d46aa42e28de284ce55721c31c.jpg" alt="">
+      </div>
+      <div class="editorial__content">
+        <h2 class="editorial__title">
+          The White<br>Shirt Is the<br>Only Shirt<br>You Need
+        </h2>
+      </div>
+      <div class="editorial__side-caption">
+        IVORY's Heritage collection proves that white is never simple—it is infinite.
+      </div>
+      <div class="editorial__side-img editorial__side-img--right">
+        <img src="website photos/cc432accc5a7008735e2b82a0a6509f2.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ─── IMAGE STRIP ───────────────────────────────── -->
+    <div class="strip">
+      <div class="strip__inner">
+        <!-- Set A -->
+        <img class="strip__img" src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="">
+        <img class="strip__img" src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="">
+        <img class="strip__img" src="website photos/dc9423509aef9ee91e6ba440bd472698.jpg" alt="">
+        <img class="strip__img" src="website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg" alt="">
+        <img class="strip__img" src="website photos/f9c5a469226837f8ff50932539c2dc54.jpg" alt="">
+        <img class="strip__img" src="website photos/860a73d46aa42e28de284ce55721c31c.jpg" alt="">
+        <img class="strip__img" src="website photos/cc432accc5a7008735e2b82a0a6509f2.jpg" alt="">
+        <img class="strip__img" src="website photos/b776d7041bf124ca81d3f664eb61adf3.jpg" alt="">
+        <img class="strip__img" src="website photos/ca007e292662ceafe9aac5e61908b230.jpg" alt="">
+        <img class="strip__img" src="website photos/c76e57de4f4b8ffe169a7037f5ef3555.jpg" alt="">
+        <img class="strip__img" src="website photos/eb0e0008d1f14e73098d67e1b882938b.jpg" alt="">
+        <img class="strip__img" src="website photos/a634a209c941fa266a1fd11bcfd71014.jpg" alt="">
+        <img class="strip__img" src="website photos/faf8e2bd7be07e7dc46df7e8938cd409.jpg" alt="">
+        <img class="strip__img" src="website photos/10d25dbc47d70f2904b0d4d6f26b2ba5.jpg" alt="">
+        <!-- Set B (duplicate for seamless loop) -->
+        <img class="strip__img" src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="">
+        <img class="strip__img" src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="">
+        <img class="strip__img" src="website photos/dc9423509aef9ee91e6ba440bd472698.jpg" alt="">
+        <img class="strip__img" src="website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg" alt="">
+        <img class="strip__img" src="website photos/f9c5a469226837f8ff50932539c2dc54.jpg" alt="">
+        <img class="strip__img" src="website photos/860a73d46aa42e28de284ce55721c31c.jpg" alt="">
+        <img class="strip__img" src="website photos/cc432accc5a7008735e2b82a0a6509f2.jpg" alt="">
+        <img class="strip__img" src="website photos/b776d7041bf124ca81d3f664eb61adf3.jpg" alt="">
+        <img class="strip__img" src="website photos/ca007e292662ceafe9aac5e61908b230.jpg" alt="">
+        <img class="strip__img" src="website photos/c76e57de4f4b8ffe169a7037f5ef3555.jpg" alt="">
+        <img class="strip__img" src="website photos/eb0e0008d1f14e73098d67e1b882938b.jpg" alt="">
+        <img class="strip__img" src="website photos/a634a209c941fa266a1fd11bcfd71014.jpg" alt="">
+        <img class="strip__img" src="website photos/faf8e2bd7be07e7dc46df7e8938cd409.jpg" alt="">
+        <img class="strip__img" src="website photos/10d25dbc47d70f2904b0d4d6f26b2ba5.jpg" alt="">
+      </div>
+    </div>
+
+    <!-- ─── ALL LOOKS ─────────────────────────────────── -->
+    <section class="all-looks fade-up">
+      <h2 class="all-looks__heading">All Looks</h2>
+      <div class="all-looks__grid">
+
+        <div class="all-looks__meta">
+          <div>
+            <span class="meta-label">Collection</span>
+            <p class="meta-value">Heritage</p>
+          </div>
+          <div>
+            <span class="meta-label">Edition</span>
+            <p class="meta-value">Spring/Summer 2025</p>
+          </div>
+          <div>
+            <span class="meta-label">Lineup</span>
+            <p class="meta-value">01–24</p>
+          </div>
+          <div>
+            <span class="meta-label">Looks</span>
+            <p class="meta-value" id="looksCounter">Look 1</p>
+          </div>
+          <p class="all-looks__desc">From crisp cotton shirts and flowing linen to sculptural white outerwear—every look in Heritage is a study in the elegance of white. One colour, infinite possibility.</p>
+          <div class="all-looks__nav-row">
+            <button onclick="prevLook()">←</button>
+            <span id="looksNav">01 / 24</span>
+            <button onclick="nextLook()">→</button>
+          </div>
+        </div>
+
+        <div class="all-looks__main-img" id="mainLookImg">
+          <img src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="Look 1" id="mainLookImgEl">
+        </div>
+
+        <div class="all-looks__thumbs">
+          <div class="all-looks__thumb active" onclick="selectLook(1)">
+            <img src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="Look 1">
+          </div>
+          <div class="all-looks__thumb" onclick="selectLook(2)">
+            <img src="website photos/dc9423509aef9ee91e6ba440bd472698.jpg" alt="Look 2">
+          </div>
+          <div class="all-looks__thumb" onclick="selectLook(3)">
+            <img src="website photos/f9c5a469226837f8ff50932539c2dc54.jpg" alt="Look 3">
+          </div>
+          <div class="all-looks__thumb" onclick="selectLook(4)">
+            <img src="website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg" alt="Look 4">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── PREVIOUS COLLECTIONS ──────────────────────── -->
+    <section class="previous fade-up">
+      <h2 class="previous__heading">Previous Collections</h2>
+      <div class="previous__track">
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/eb0e0008d1f14e73098d67e1b882938b.jpg" alt="Essence">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Essence</p>
+            <p class="previous__card-season">Fall/Winter 2024</p>
+          </div>
+        </div>
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/ca007e292662ceafe9aac5e61908b230.jpg" alt="Serenity">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Serenity</p>
+            <p class="previous__card-season">Spring/Summer 2024</p>
+          </div>
+        </div>
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/c76e57de4f4b8ffe169a7037f5ef3555.jpg" alt="Lumière">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Lumière</p>
+            <p class="previous__card-season">Fall/Winter 2023</p>
+          </div>
+        </div>
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/a634a209c941fa266a1fd11bcfd71014.jpg" alt="Form">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Form</p>
+            <p class="previous__card-season">Spring/Summer 2023</p>
+          </div>
+        </div>
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg" alt="Haven">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Haven</p>
+            <p class="previous__card-season">Fall/Winter 2022</p>
+          </div>
+        </div>
+        <div class="previous__card">
+          <div class="previous__card-imgwrap">
+            <img src="website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg" alt="Origin">
+          </div>
+          <div class="previous__card-info">
+            <p class="previous__card-name">Origin</p>
+            <p class="previous__card-season">Spring/Summer 2022</p>
+          </div>
+        </div>
+      </div>
+      <div class="previous__pagination">
+        <button>←</button>
+        <span>01 / 12</span>
+        <button>→</button>
+      </div>
+    </section>
+
+    <!-- ─── CTA ───────────────────────────────────────── -->
+    <section class="cta-section">
+      <div class="cta-section__side-img cta-section__side-img--left">
+        <img src="website photos/faf8e2bd7be07e7dc46df7e8938cd409.jpg" alt="">
+      </div>
+      <div class="cta-section__content">
+        <a href="#collection" class="cta-section__link">
+          Claim Your Style <span class="cta-section__arrow">→</span>
+        </a>
+      </div>
+      <div class="cta-section__side-img cta-section__side-img--right">
+        <img src="website photos/b776d7041bf124ca81d3f664eb61adf3.jpg" alt="">
+      </div>
+    </section>
+
+    <!-- ─── TICKER ────────────────────────────────────── -->
+    <div class="ticker">
+      <div class="ticker__inner">
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <!-- duplicate for seamless -->
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+        <span class="ticker__item">From Mumbai to Milan <span class="ticker__dot"></span></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ────────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div>
+      <p class="footer__col-title">Stores</p>
+      <div class="footer__stores">
+        <a href="#" class="footer__link">Mumbai</a>
+        <a href="#" class="footer__link">Delhi</a>
+        <a href="#" class="footer__link">Bangalore</a>
+        <a href="#" class="footer__link">Milan</a>
+        <a href="#" class="footer__link">Paris</a>
+        <a href="#" class="footer__link">London</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Follow Us</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">YouTube</a>
+        <a href="#" class="footer__link">Twitter</a>
+        <a href="#" class="footer__link">Pinterest</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Contact</p>
+      <div class="footer__links">
+        <a href="mailto:info@ivory.com" class="footer__link">info@ivory.com</a>
+        <a href="mailto:press@ivory.com" class="footer__link">press@ivory.com</a>
+        <a href="mailto:showroom@ivory.com" class="footer__link">showroom@ivory.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll fade-in ──────────────────────────────────────
+    // Add will-animate BEFORE observing so elements animate on first scroll into view
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('will-animate'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Look Navigator ──────────────────────────────────────
+    let currentLook = 1;
+    const totalLooks = 24;
+
+    const lookPhotos = [
+      'website photos/bd2ae5ec3775e588d3e1aff0162b2999.jpg',
+      'website photos/cabb479a02e9b43b798a8507df8cc1f3.jpg',
+      'website photos/dc9423509aef9ee91e6ba440bd472698.jpg',
+      'website photos/358ecd41c1c95b9c9df18e3a847cf376.jpg',
+      'website photos/f9c5a469226837f8ff50932539c2dc54.jpg',
+      'website photos/860a73d46aa42e28de284ce55721c31c.jpg',
+      'website photos/cc432accc5a7008735e2b82a0a6509f2.jpg',
+      'website photos/b776d7041bf124ca81d3f664eb61adf3.jpg',
+      'website photos/ca007e292662ceafe9aac5e61908b230.jpg',
+      'website photos/c76e57de4f4b8ffe169a7037f5ef3555.jpg',
+      'website photos/eb0e0008d1f14e73098d67e1b882938b.jpg',
+      'website photos/a634a209c941fa266a1fd11bcfd71014.jpg',
+      'website photos/faf8e2bd7be07e7dc46df7e8938cd409.jpg',
+      'website photos/10d25dbc47d70f2904b0d4d6f26b2ba5.jpg',
+    ];
+
+    function updateLook(n) {
+      currentLook = Math.max(1, Math.min(totalLooks, n));
+      document.getElementById('looksCounter').textContent = 'Look ' + currentLook;
+      document.getElementById('looksNav').textContent =
+        String(currentLook).padStart(2, '0') + ' / ' + String(totalLooks).padStart(2, '0');
+
+      document.getElementById('mainLookImgEl').src =
+        lookPhotos[(currentLook - 1) % lookPhotos.length];
+
+      document.querySelectorAll('.all-looks__thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === (currentLook - 1) % 4);
+      });
+    }
+
+    function nextLook() { updateLook(currentLook + 1); }
+    function prevLook() { updateLook(currentLook - 1); }
+    function selectLook(n) { updateLook(n); }
+  </script>
+</body>
+</html>

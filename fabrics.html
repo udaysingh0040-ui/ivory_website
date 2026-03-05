@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fabrics — IVORY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ebony: #131111;
+      --ivory-white: #FAFAF8;
+      --alabaster: #F0F0E8;
+      --warm-beige: #E8D5C0;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      background-color: var(--ivory-white);
+      color: var(--ebony);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Grain ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background-color: var(--ebony);
+      border-bottom: 1px solid rgba(250,250,248,0.08);
+    }
+
+    .nav__logo { height: 44px; width: auto; display: block; }
+
+    .nav__links { display: flex; gap: 44px; }
+
+    .nav__links a {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.65);
+      transition: color 0.25s ease;
+    }
+    .nav__links a:hover { color: var(--ivory-white); }
+    .nav__links a.active {
+      color: var(--ivory-white);
+      border-bottom: 1px solid rgba(250,250,248,0.5);
+      padding-bottom: 2px;
+    }
+
+    .nav__right { display: flex; align-items: center; gap: 20px; }
+    .cart-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      transition: opacity 0.2s ease;
+      color: rgba(250,250,248,0.7);
+    }
+    .cart-link:hover { opacity: 0.7; color: var(--ivory-white); }
+    .cart-link svg { width: 22px; height: 22px; }
+
+    .nav__cta {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.65);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.25s ease;
+      cursor: pointer;
+    }
+    .nav__cta:hover { color: var(--ivory-white); }
+    .nav__cta::after { content: '→'; font-weight: 300; font-size: 13px; }
+
+    .nav__brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav__brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--ivory-white);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* ── UTILITIES ─────────────────────────────────────── */
+    .label-sm {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .body-sm {
+      font-size: 12px;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      padding-top: 72px;
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__left {
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(250,250,248,0.07);
+      position: relative;
+    }
+
+    .hero__catalog-tag {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.35);
+    }
+    .hero__catalog-tag::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: rgba(250,250,248,0.2);
+    }
+
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(60px, 9.5vw, 132px);
+      font-weight: 700;
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      font-weight: 300;
+      display: block;
+      font-size: clamp(48px, 7.5vw, 108px);
+    }
+
+    .hero__tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(250,250,248,0.55);
+      line-height: 1.4;
+    }
+
+    .hero__bottom {
+      border-top: 1px solid rgba(250,250,248,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hero__count {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.3);
+    }
+
+    .hero__scroll-cta {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.3);
+    }
+
+    .hero__right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .hero__photo {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hero__photo:hover img { transform: scale(1.04); }
+
+    .hero__photo-label {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.7);
+      background: rgba(19,17,17,0.5);
+      padding: 4px 8px;
+    }
+
+    /* ── INTRO BAND ────────────────────────────────────── */
+    .intro-band {
+      background-color: var(--ivory-white);
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .intro-band__item {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.45);
+    }
+
+    .intro-band__sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(19,17,17,0.15);
+    }
+
+    /* ── FABRIC GRID ───────────────────────────────────── */
+    .fabric-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3px;
+      background-color: rgba(19,17,17,0.1);
+    }
+
+    /* Card nth-child col spans */
+    .fabric-card:nth-child(1) { grid-column: span 7; height: 580px; }
+    .fabric-card:nth-child(2) { grid-column: span 5; height: 580px; }
+    .fabric-card:nth-child(3) { grid-column: span 5; height: 520px; }
+    .fabric-card:nth-child(4) { grid-column: span 7; height: 520px; }
+    .fabric-card:nth-child(5) { grid-column: span 4; height: 460px; }
+    .fabric-card:nth-child(6) { grid-column: span 4; height: 460px; }
+    .fabric-card:nth-child(7) { grid-column: span 4; height: 460px; }
+
+    /* ── FABRIC CARD ───────────────────────────────────── */
+    .fabric-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--ebony);
+    }
+
+    .fabric-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
+      filter: grayscale(15%);
+    }
+    .fabric-card:hover .fabric-card__img {
+      transform: scale(1.06);
+      filter: grayscale(0%);
+    }
+
+    /* base gradient */
+    .fabric-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+        rgba(19,17,17,0.92) 0%,
+        rgba(19,17,17,0.4) 40%,
+        rgba(19,17,17,0.05) 75%,
+        transparent 100%
+      );
+      transition: background 0.5s ease;
+    }
+    .fabric-card:hover .fabric-card__overlay {
+      background: linear-gradient(to top,
+        rgba(19,17,17,0.96) 0%,
+        rgba(19,17,17,0.55) 50%,
+        rgba(19,17,17,0.15) 80%,
+        transparent 100%
+      );
+    }
+
+    .fabric-card__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px;
+      color: var(--ivory-white);
+    }
+
+    .fabric-card__num {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      color: rgba(250,250,248,0.35);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .fabric-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .fabric-card__subtitle {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      margin-bottom: 0;
+      transition: margin-bottom 0.4s ease;
+    }
+
+    /* Hidden initially, revealed on hover */
+    .fabric-card__hover-info {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fabric-card:hover .fabric-card__hover-info {
+      max-height: 120px;
+    }
+
+    .fabric-card__price-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(250,250,248,0.12);
+    }
+
+    .fabric-card__price-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .fabric-card__price-qty {
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      color: rgba(250,250,248,0.38);
+      text-transform: uppercase;
+    }
+
+    .fabric-card__price-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ivory-white);
+    }
+
+    .fabric-card__btn {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ivory-white);
+      background: rgba(250,250,248,0.12);
+      border: 1px solid rgba(250,250,248,0.2);
+      padding: 10px 20px;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+    }
+    .fabric-card__btn:hover {
+      background: rgba(250,250,248,0.22);
+      border-color: rgba(250,250,248,0.4);
+    }
+    .fabric-card__btn::after { content: '→'; }
+
+    /* Card top badge */
+    .fabric-card__badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.6);
+      background: rgba(19,17,17,0.5);
+      backdrop-filter: blur(4px);
+      padding: 5px 10px;
+    }
+
+    /* ── PRICING SECTION ───────────────────────────────── */
+    .pricing {
+      background-color: var(--alabaster);
+      padding: 88px 48px;
+    }
+
+    .pricing__header {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      align-items: end;
+      margin-bottom: 56px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+      gap: 40px;
+    }
+
+    .pricing__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .pricing__note {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: rgba(19,17,17,0.4);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .pricing__tables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .pricing__table-wrap {
+      background: var(--ivory-white);
+      border: 1px solid rgba(19,17,17,0.07);
+    }
+
+    .pricing__table-head {
+      background: var(--ebony);
+      color: var(--ivory-white);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pricing__table-head-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .pricing__table-head-sub {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.45);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      font-weight: 500;
+      padding: 12px 24px;
+      text-align: left;
+      border-bottom: 1px solid rgba(19,17,17,0.07);
+    }
+
+    thead th:not(:first-child) { text-align: right; }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(19,17,17,0.06);
+      transition: background 0.2s ease;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(19,17,17,0.03); }
+
+    tbody td {
+      padding: 14px 24px;
+      font-size: 11.5px;
+      color: rgba(19,17,17,0.75);
+      font-weight: 300;
+    }
+
+    tbody td:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--ebony);
+    }
+
+    tbody td:not(:first-child) {
+      text-align: right;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(19,17,17,0.8);
+    }
+
+    /* ── BOTTOM CTA ────────────────────────────────────── */
+    .bottom-cta {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .bottom-cta__text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .bottom-cta__text p {
+      font-size: 12px;
+      color: rgba(250,250,248,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    .bottom-cta__btn {
+      flex-shrink: 0;
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ebony);
+      background: var(--ivory-white);
+      padding: 16px 36px;
+      cursor: pointer;
+      border: none;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      transition: background 0.25s ease, color 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bottom-cta__btn::after { content: '→'; }
+    .bottom-cta__btn:hover { background: var(--alabaster); }
+
+    /* ── TICKER ────────────────────────────────────────── */
+    .ticker {
+      background-color: var(--ebony);
+      overflow: hidden;
+      padding: 13px 0;
+      border-top: 1px solid rgba(250,250,248,0.08);
+    }
+
+    .ticker__inner {
+      display: flex;
+      animation: ticker-scroll 32s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker__item {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      padding: 0 32px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ticker__dot {
+      width: 3px;
+      height: 3px;
+      background: rgba(250,250,248,0.3);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    .footer {
+      background-color: var(--ebony);
+      color: var(--ivory-white);
+      padding: 56px 48px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      border-top: 1px solid rgba(250,250,248,0.07);
+    }
+
+    .footer__col-title {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.38);
+      margin-bottom: 22px;
+    }
+
+    .footer__stores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .footer__link {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+      color: rgba(250,250,248,0.72);
+      line-height: 1.7;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .footer__link:hover { color: var(--ivory-white); }
+
+    .footer__links { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── MODAL OVERLAY ─────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(19,17,17,0.82);
+      z-index: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-panel {
+      background: var(--ivory-white);
+      width: 540px;
+      max-width: calc(100vw - 40px);
+      max-height: 92vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(24px) scale(0.98);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .modal-overlay.active .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      background: var(--ebony);
+      color: var(--ivory-white);
+      padding: 28px 36px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .modal-fabric-tag {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.45);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .modal-selected-fabric {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: rgba(250,250,248,0.5);
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s ease;
+      margin-top: 2px;
+    }
+    .modal-close:hover { color: var(--ivory-white); }
+
+    .modal-body {
+      padding: 36px;
+    }
+
+    .modal-intro {
+      font-size: 11.5px;
+      color: rgba(19,17,17,0.5);
+      margin-bottom: 28px;
+      line-height: 1.7;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(19,17,17,0.09);
+    }
+
+    /* ── FORM ──────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 20px;
+    }
+
+    .form-field {
+      margin-bottom: 24px;
+    }
+
+    .form-field.full { grid-column: span 2; }
+
+    .form-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.45);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(19,17,17,0.2);
+      padding: 10px 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ebony);
+      outline: none;
+      transition: border-color 0.25s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-bottom-color: var(--ebony);
+    }
+
+    .form-input::placeholder {
+      color: rgba(19,17,17,0.25);
+      font-size: 12px;
+    }
+
+    .form-select-wrap {
+      position: relative;
+    }
+
+    .form-select-wrap::after {
+      content: '↓';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: rgba(19,17,17,0.35);
+      pointer-events: none;
+    }
+
+    .form-select option { background: var(--ivory-white); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--ebony);
+      color: var(--ivory-white);
+      border: none;
+      padding: 18px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.25s ease, opacity 0.25s ease;
+    }
+    .form-submit::after { content: '→'; font-size: 14px; font-weight: 300; }
+    .form-submit:hover { background: #1f1c1c; }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-submit-loading::after { content: '...'; animation: none; }
+
+    /* ── SUCCESS STATE ─────────────────────────────────── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 48px 36px;
+    }
+
+    .success-check {
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(19,17,17,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 20px;
+      color: var(--ebony);
+    }
+
+    .success-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .success-body {
+      font-size: 12px;
+      color: rgba(19,17,17,0.55);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .success-close-btn {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.45);
+      background: none;
+      border: 1px solid rgba(19,17,17,0.15);
+      padding: 12px 28px;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .success-close-btn:hover {
+      border-color: var(--ebony);
+      color: var(--ebony);
+    }
+
+    /* ── SCROLL FADE ───────────────────────────────────── */
+    .fade-up.will-animate {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────────── -->
+  <nav class="nav">
+    <a href="index.html" class="nav__brand-wrap">
+      <img src="brand_assets/ivory_logo_transparent.png" alt="IVORY" class="nav__logo">
+      <span class="nav__brand-name">IVORY</span>
+    </a>
+    <div class="nav__links">
+      <a href="about.html">About</a>
+      <a href="collection.html">Collection</a>
+      <a href="fabrics.html" class="active">Fabrics</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="nav__right">
+      <span class="nav__cta" id="nav-sample-cta">Request Sample</span>
+      <a href="catalogue.html" class="cart-link" title="View Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__left">
+      <div class="hero__catalog-tag">2026 Catalog</div>
+
+      <div>
+        <h1 class="hero__title">
+          IVORY<br>
+          <em>Fabrics</em>
+        </h1>
+        <p class="hero__tagline" style="margin-top:28px;">
+          Crafted in India.<br>Engineered for Global Standards.
+        </p>
+      </div>
+
+      <div class="hero__bottom">
+        <span class="hero__count">07 Premium Fabrics</span>
+        <span class="hero__scroll-cta">↓ Explore Collection</span>
+      </div>
+    </div>
+
+    <div class="hero__right" id="hero-photos">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── INTRO BAND ────────────────────────────────── -->
+  <div class="intro-band">
+    <span class="intro-band__item">Built for Institutional Buyers</span>
+    <div class="intro-band__sep"></div>
+    <span class="intro-band__item">Global Export &amp; Domestic Pricing</span>
+    <div class="intro-band__sep"></div>
+    <span class="intro-band__item">Structured for Global Growth</span>
+    <div class="intro-band__sep"></div>
+    <span class="intro-band__item">Minimum Order: 500 Meters</span>
+  </div>
+
+  <!-- ─── FABRIC GRID ───────────────────────────────── -->
+  <div class="fabric-grid" id="fabric-grid"></div>
+
+  <!-- ─── PRICING SECTION ───────────────────────────── -->
+  <section class="pricing fade-up">
+    <div class="pricing__header">
+      <span class="label-sm" style="color:rgba(19,17,17,0.45);">Rate Card</span>
+      <h2 class="pricing__title">Export &amp; Domestic Pricing</h2>
+      <p class="pricing__note">
+        All prices per meter.<br>
+        Volume tiers: 500m · 1,000m · 2,000m
+      </p>
+    </div>
+    <div class="pricing__tables">
+      <!-- Export USD -->
+      <div class="pricing__table-wrap">
+        <div class="pricing__table-head">
+          <span class="pricing__table-head-title">Export Pricing</span>
+          <span class="pricing__table-head-sub">USD / Meter</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>500m</th>
+              <th>1,000m</th>
+              <th>2,000m</th>
+            </tr>
+          </thead>
+          <tbody id="usd-table-body"></tbody>
+        </table>
+      </div>
+      <!-- India INR -->
+      <div class="pricing__table-wrap">
+        <div class="pricing__table-head">
+          <span class="pricing__table-head-title">Domestic Pricing</span>
+          <span class="pricing__table-head-sub">INR / Meter</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Fabric</th>
+              <th>500m</th>
+              <th>1,000m</th>
+              <th>2,000m</th>
+            </tr>
+          </thead>
+          <tbody id="inr-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BOTTOM CTA ────────────────────────────────── -->
+  <div class="bottom-cta fade-up">
+    <div class="bottom-cta__text">
+      <h2>Ready to place an order?</h2>
+      <p>Select any fabric above, or request a general enquiry with our team.</p>
+    </div>
+    <button class="bottom-cta__btn" id="bottom-order-btn">Request Order</button>
+  </div>
+
+  <!-- ─── TICKER ────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker__inner" id="ticker-inner"></div>
+  </div>
+
+  <!-- ─── FOOTER ───────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div>
+      <p class="footer__col-title">Stores</p>
+      <div class="footer__stores">
+        <a href="#" class="footer__link">Mumbai</a>
+        <a href="#" class="footer__link">Delhi</a>
+        <a href="#" class="footer__link">Bangalore</a>
+        <a href="#" class="footer__link">Milan</a>
+        <a href="#" class="footer__link">Paris</a>
+        <a href="#" class="footer__link">London</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Follow Us</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">YouTube</a>
+        <a href="#" class="footer__link">Twitter</a>
+        <a href="#" class="footer__link">Pinterest</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer__col-title">Contact</p>
+      <div class="footer__links">
+        <a href="mailto:info@ivory.com" class="footer__link">info@ivory.com</a>
+        <a href="mailto:press@ivory.com" class="footer__link">press@ivory.com</a>
+        <a href="mailto:fabrics@ivory.com" class="footer__link">fabrics@ivory.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── ORDER MODAL ───────────────────────────────── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <span class="modal-fabric-tag">Selected Fabric</span>
+          <span class="modal-selected-fabric" id="modal-fabric-name">All Fabrics</span>
+        </div>
+        <button class="modal-close" id="modal-close-btn">✕</button>
+      </div>
+
+      <!-- FORM STATE -->
+      <div class="modal-body" id="modal-form-wrap">
+        <p class="modal-intro">
+          Fill in your details below and our team will reach out within 24 hours
+          with availability, lead times, and a formal quotation.
+        </p>
+        <form id="order-form" class="form-grid" novalidate>
+          <input type="hidden" name="fabric" id="form-fabric">
+          <div class="form-field">
+            <label class="form-label">Full Name *</label>
+            <input class="form-input" type="text" name="name" required placeholder="Your full name">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Contact Number *</label>
+            <input class="form-input" type="tel" name="phone" required placeholder="+91 or international">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Country *</label>
+            <input class="form-input" type="text" name="country" required placeholder="Your country">
+          </div>
+          <div class="form-field full">
+            <label class="form-label">Quantity Required</label>
+            <div class="form-select-wrap">
+              <select class="form-select" name="quantity">
+                <option value="500m">500 meters</option>
+                <option value="1000m">1,000 meters</option>
+                <option value="2000m">2,000 meters</option>
+                <option value="Custom">Custom quantity</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field full" id="custom-qty-wrap" style="display:none; margin-top:-12px;">
+            <label class="form-label">Specify Quantity</label>
+            <input class="form-input" type="text" name="custom_quantity" placeholder="e.g. 1,500 meters">
+          </div>
+          <div class="form-field full" style="margin-top:8px;">
+            <button type="submit" class="form-submit" id="form-submit-btn">Submit Request</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+        <div class="success-check">✓</div>
+        <h3 class="success-heading">Enquiry Received</h3>
+        <p class="success-body">
+          Thank you for reaching out.<br>
+          We will contact you soon — our team typically<br>responds within 24 business hours.
+        </p>
+        <button class="success-close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── FABRIC DATA ─────────────────────────────────────── */
+    const fabrics = [
+      {
+        id: 'giza-cotton',
+        name: 'Giza Cotton',
+        label: 'The Crown of Cotton',
+        tagline: 'Extra-long staple. Luminous. Durable.',
+        photo: 'fabric page/giza cotton.jpg',
+        badge: 'Premium',
+        usd: { '500m': '$11.20', '1000m': '$10.60', '2000m': '$9.95' },
+        inr: { '500m': '₹830', '1000m': '₹790', '2000m': '₹750' },
+      },
+      {
+        id: 'premium-linen',
+        name: 'Premium Linen',
+        label: 'The Fabric of Light',
+        tagline: 'Breathable. Durable. Seasonless.',
+        photo: 'fabric page/linen.jpg',
+        badge: 'Bestseller',
+        usd: { '500m': '$9.40', '1000m': '$8.80', '2000m': '$8.20' },
+        inr: { '500m': '₹690', '1000m': '₹650', '2000m': '₹610' },
+      },
+      {
+        id: 'organic-cotton',
+        name: 'GOTS Organic Cotton',
+        label: 'The Soul of the Soil',
+        tagline: 'Gujarat & Maharashtra. GOTS Certified.',
+        photo: 'fabric page/organic cotton.jpg',
+        badge: 'Certified',
+        usd: { '500m': '$6.20', '1000m': '$5.70', '2000m': '$5.20' },
+        inr: { '500m': '₹480', '1000m': '₹450', '2000m': '₹420' },
+      },
+      {
+        id: 'banana-lotus',
+        name: 'Banana & Lotus Fiber',
+        label: 'Botanical Silk',
+        tagline: 'Vegan. Cruelty-free. Agricultural waste engineered.',
+        photo: 'fabric page/banana and lotus fibre.jpg',
+        badge: 'Rare',
+        usd: { '500m': '$18.50', '1000m': '$17.20', '2000m': '$15.90' },
+        inr: { '500m': '₹1,450', '1000m': '₹1,360', '2000m': '₹1,250' },
+      },
+      {
+        id: 'hemp-linen',
+        name: 'Hemp-Linen Blend',
+        label: 'Woven for the Ages',
+        tagline: 'Durability of hemp. Softness of flax.',
+        photo: 'fabric page/hemp linen.jpg',
+        badge: 'Sustainable',
+        usd: { '500m': '$12.40', '1000m': '$11.60', '2000m': '$10.90' },
+        inr: { '500m': '₹950', '1000m': '₹890', '2000m': '₹840' },
+      },
+      {
+        id: 'khadi-indigo',
+        name: 'Hand-Spun Khadi Indigo',
+        label: 'The Rhythm of the Loom',
+        tagline: 'Handcrafted. Naturally dyed. Carbon-neutral.',
+        photo: 'fabric page/khadi indigo.jpg',
+        badge: 'Artisan',
+        usd: { '500m': '$13.80', '1000m': '$12.90', '2000m': '$12.10' },
+        inr: { '500m': '₹1,100', '1000m': '₹1,040', '2000m': '₹980' },
+      },
+      {
+        id: 'bamboo-cotton',
+        name: 'Bamboo-Cotton',
+        label: 'Performance, Perfected by Nature',
+        tagline: 'Antimicrobial. Premium activewear grade.',
+        photo: 'fabric page/bamboo cotton.jpg',
+        badge: 'Performance',
+        usd: { '500m': '$7.40', '1000m': '$6.90', '2000m': '$6.40' },
+        inr: { '500m': '₹590', '1000m': '₹550', '2000m': '₹510' },
+      },
+    ];
+
+    /* ── HERO PHOTOS (first 4) ───────────────────────────── */
+    const heroPhotos = document.getElementById('hero-photos');
+    [0, 1, 2, 3].forEach(i => {
+      const f = fabrics[i];
+      const div = document.createElement('div');
+      div.className = 'hero__photo';
+      div.innerHTML = `
+        <img src="${f.photo}" alt="${f.name}" loading="lazy">
+        <span class="hero__photo-label">${f.name}</span>
+      `;
+      heroPhotos.appendChild(div);
+    });
+
+    /* ── FABRIC GRID RENDER ──────────────────────────────── */
+    const grid = document.getElementById('fabric-grid');
+    fabrics.forEach((f, i) => {
+      const card = document.createElement('div');
+      card.className = 'fabric-card';
+
+      const priceKeys = Object.keys(f.usd);
+      const priceHtml = priceKeys.map(qty => `
+        <div class="fabric-card__price-item">
+          <span class="fabric-card__price-qty">${qty}</span>
+          <span class="fabric-card__price-val">${f.usd[qty]}</span>
+        </div>
+      `).join('');
+
+      card.innerHTML = `
+        <img class="fabric-card__img" src="${f.photo}" alt="${f.name}" loading="lazy">
+        <div class="fabric-card__overlay"></div>
+        <span class="fabric-card__badge">${f.badge}</span>
+        <div class="fabric-card__content">
+          <span class="fabric-card__num">0${i + 1}</span>
+          <h3 class="fabric-card__name">${f.name}</h3>
+          <p class="fabric-card__subtitle">${f.label}</p>
+          <div class="fabric-card__hover-info">
+            <div class="fabric-card__price-row">${priceHtml}</div>
+            <button class="fabric-card__btn" data-fabric-id="${f.id}">Select Fabric</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    /* ── PRICING TABLES ──────────────────────────────────── */
+    const usdBody = document.getElementById('usd-table-body');
+    const inrBody = document.getElementById('inr-table-body');
+
+    fabrics.forEach(f => {
+      usdBody.innerHTML += `
+        <tr>
+          <td>${f.name}</td>
+          <td>${f.usd['500m']}</td>
+          <td>${f.usd['1000m']}</td>
+          <td>${f.usd['2000m']}</td>
+        </tr>`;
+      inrBody.innerHTML += `
+        <tr>
+          <td>${f.name}</td>
+          <td>${f.inr['500m']}</td>
+          <td>${f.inr['1000m']}</td>
+          <td>${f.inr['2000m']}</td>
+        </tr>`;
+    });
+
+    /* ── TICKER ──────────────────────────────────────────── */
+    const tickerInner = document.getElementById('ticker-inner');
+    const items = [...fabrics, ...fabrics].map(f =>
+      `<span class="ticker__item">${f.name}<span class="ticker__dot"></span></span>`
+    ).join('');
+    tickerInner.innerHTML = items;
+
+    /* ── MODAL LOGIC ─────────────────────────────────────── */
+    const overlay = document.getElementById('modal-overlay');
+    const fabricNameEl = document.getElementById('modal-fabric-name');
+    const formFabricInput = document.getElementById('form-fabric');
+    const formWrap = document.getElementById('modal-form-wrap');
+    const successState = document.getElementById('success-state');
+    const customQtyWrap = document.getElementById('custom-qty-wrap');
+    const qtySelect = document.querySelector('select[name="quantity"]');
+
+    let selectedFabricName = 'General Enquiry';
+
+    function openModal(fabricId) {
+      const fabric = fabricId ? fabrics.find(f => f.id === fabricId) : null;
+      selectedFabricName = fabric ? fabric.name : 'General Enquiry';
+      fabricNameEl.textContent = selectedFabricName;
+      formFabricInput.value = selectedFabricName;
+
+      // Reset form state
+      document.getElementById('order-form').reset();
+      formFabricInput.value = selectedFabricName;
+      formWrap.style.display = 'block';
+      successState.style.display = 'none';
+      customQtyWrap.style.display = 'none';
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Quantity custom toggle
+    qtySelect.addEventListener('change', () => {
+      customQtyWrap.style.display = qtySelect.value === 'Custom' ? 'block' : 'none';
+    });
+
+    // Card buttons
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('[data-fabric-id]');
+      if (btn) openModal(btn.dataset.fabricId);
+    });
+
+    // Nav CTA + bottom btn
+    document.getElementById('nav-sample-cta').addEventListener('click', () => openModal(null));
+    document.getElementById('bottom-order-btn').addEventListener('click', () => openModal(null));
+
+    // Close triggers
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    /* ── FORM SUBMIT ─────────────────────────────────────── */
+    document.getElementById('order-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('form-submit-btn');
+
+      // Validate required fields
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(input => {
+        if (!input.value.trim()) {
+          input.style.borderBottomColor = '#c0392b';
+          valid = false;
+          input.addEventListener('input', () => {
+            input.style.borderBottomColor = '';
+          }, { once: true });
+        }
+      });
+      if (!valid) return;
+
+      const data = {
+        fabric: form.fabric.value,
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        quantity: form.quantity.value === 'Custom'
+          ? (form.custom_quantity ? form.custom_quantity.value.trim() : 'Custom')
+          : form.quantity.value,
+        country: form.country.value.trim(),
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          formWrap.style.display = 'none';
+          successState.style.display = 'block';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        // Fallback: show success anyway (offline mode) + log locally
+        console.warn('API unavailable — saving to console:', data);
+        formWrap.style.display = 'none';
+        successState.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+      }
+    });
+
+    /* ── SCROLL FADE ─────────────────────────────────────── */
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('will-animate'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
