@@ -704,6 +704,126 @@
       opacity: 1 !important;
       transform: translateY(0) !important;
     }
+
+    /* ── HAMBURGER ─────────────────────────────────────────── */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 4px;
+      color: var(--ebony);
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ───────────────────────────────────────── */
+    body.menu-open { overflow: hidden; }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--ebony);
+      z-index: 490;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-16px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-menu__links { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding: 0 40px; }
+    .mobile-menu__links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: rgba(250,250,248,0.82);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(250,250,248,0.07);
+      width: 100%;
+      text-align: center;
+      transition: color 0.2s ease;
+    }
+    .mobile-menu__links a:first-child { border-top: 1px solid rgba(250,250,248,0.07); }
+    .mobile-menu__links a:hover { color: var(--ivory-white); }
+    .mobile-menu__footer {
+      position: absolute;
+      bottom: 36px;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.22);
+    }
+
+    /* ── MOBILE RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav__links { display: none !important; }
+      .nav__cta { display: none !important; }
+      .nav__hamburger { display: flex; }
+
+      /* Hero */
+      .hero__title { padding: 24px 20px 0; font-size: clamp(52px, 14vw, 88px); }
+      .hero__body { grid-template-columns: 1fr; margin-top: 16px; }
+      .hero__left-text { order: 3; padding: 20px 20px 32px; }
+      .hero__center-image { order: 1; }
+      .hero__center-image img { height: 420px; }
+      .hero__center-image-2 { display: none; }
+      .hero__right-text { order: 2; padding: 24px 20px 0; }
+      .hero__info-bottom { grid-template-columns: 1fr; padding: 20px; gap: 12px; }
+
+      /* Deeper Look */
+      .deeper { padding: 56px 20px; }
+      .deeper__heading { margin-bottom: 32px; }
+      .deeper__images { grid-template-columns: 1fr; gap: 10px; }
+      .deeper__img-wrap:nth-child(1) img { height: 400px; }
+      .deeper__img-wrap:nth-child(2) { margin-top: 0; }
+      .deeper__img-wrap:nth-child(2) img { height: 400px; }
+      .deeper__img-wrap:nth-child(3) { margin-top: 0; }
+      .deeper__img-wrap:nth-child(3) img { height: 400px; }
+      .deeper__text-row { grid-template-columns: 1fr; gap: 20px; margin-top: 36px; padding-top: 28px; }
+
+      /* Editorial */
+      .editorial { padding: 64px 20px; min-height: 320px; }
+      .editorial__side-img { display: none; }
+      .editorial__side-caption { display: none; }
+      .editorial__title { font-size: clamp(38px, 10vw, 60px); }
+
+      /* All Looks */
+      .all-looks { padding: 56px 20px; }
+      .all-looks__grid { grid-template-columns: 1fr; gap: 20px; }
+      .all-looks__main-img img { height: 460px; }
+      .all-looks__thumbs { flex-direction: row; overflow-x: auto; scrollbar-width: none; gap: 6px; }
+      .all-looks__thumbs::-webkit-scrollbar { display: none; }
+      .all-looks__thumb img { height: 110px; width: 80px; }
+
+      /* Previous Collections */
+      .previous { padding: 56px 20px; }
+      .previous__card { width: 200px; }
+      .previous__card-imgwrap img { height: 270px; }
+
+      /* CTA Section */
+      .cta-section { padding: 72px 20px; }
+      .cta-section__side-img { display: none; }
+
+      /* Footer */
+      .footer { grid-template-columns: 1fr; padding: 40px 20px; gap: 32px; }
+    }
   </style>
 </head>
 <body>
@@ -729,8 +849,22 @@
           <path d="M16 10a4 4 0 0 1-8 0"/>
         </svg>
       </a>
+      <button class="nav__hamburger" id="navHamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__links">
+      <a href="about.html" onclick="toggleMobileMenu()">About</a>
+      <a href="collection.html" onclick="toggleMobileMenu()">Collection</a>
+      <a href="fabrics.html" onclick="toggleMobileMenu()">Fabrics</a>
+      <a href="catalogue.html" onclick="toggleMobileMenu()">Catalogue</a>
+      <a href="contact.html" onclick="toggleMobileMenu()">Contact Us</a>
+    </div>
+    <p class="mobile-menu__footer">IVORY — Est. 2022</p>
+  </div>
 
   <main>
 
@@ -1028,6 +1162,13 @@
   </footer>
 
   <script>
+    // ── Mobile menu ─────────────────────────────────────────
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.getElementById('navHamburger').classList.toggle('open');
+      document.body.classList.toggle('menu-open');
+    }
+
     // ── Scroll fade-in ──────────────────────────────────────
     // Add will-animate BEFORE observing so elements animate on first scroll into view
     document.querySelectorAll('.fade-up').forEach(el => el.classList.add('will-animate'));

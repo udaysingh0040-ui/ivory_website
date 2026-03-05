@@ -18,6 +18,7 @@ CLAUDE.md
 
 # Dev tooling (optional — remove if you want these in the repo)
 screenshot.mjs
+mobile-shot.mjs
 
 # OS
 .DS_Store
