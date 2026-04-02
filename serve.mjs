@@ -138,6 +138,24 @@ http.createServer(async (req, res) => {
     return handler(vreq, makeVercelRes(res));
   }
 
+  // ── POST /api/razorpay-order ─────────────────────────
+  if (pathname === '/api/razorpay-order' && req.method === 'POST') {
+    const raw = await readBody(req);
+    const body = raw ? JSON.parse(raw) : {};
+    const { default: handler } = await import('./api/razorpay-order.js');
+    const vreq = Object.assign(req, { query: {}, body });
+    return handler(vreq, makeVercelRes(res));
+  }
+
+  // ── POST /api/razorpay-verify ────────────────────────
+  if (pathname === '/api/razorpay-verify' && req.method === 'POST') {
+    const raw = await readBody(req);
+    const body = raw ? JSON.parse(raw) : {};
+    const { default: handler } = await import('./api/razorpay-verify.js');
+    const vreq = Object.assign(req, { query: {}, body });
+    return handler(vreq, makeVercelRes(res));
+  }
+
   // ── POST /api/contact ───────────────────────────────
   if (req.method === 'POST' && req.url === '/api/contact') {
     try {

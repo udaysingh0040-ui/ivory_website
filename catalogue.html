@@ -1232,132 +1232,15 @@
         </div>
       </div>
 
-      <!-- Payment method tabs -->
-      <div class="pay-methods" id="pay-methods-wrap">
-        <button class="pay-method-btn active" data-pay="gpay">
-          <span class="pay-method-icon">G</span>
-          Google Pay
+      <!-- Razorpay pay button -->
+      <div id="pay-panels-wrap" style="padding:24px 28px;">
+        <p style="font-size:11.5px;color:rgba(19,17,17,0.45);line-height:1.8;margin-bottom:20px;">
+          Secure payment via Razorpay — UPI, Cards, Net Banking, Wallets accepted.
+        </p>
+        <button class="pay-now-btn" id="razorpay-btn" onclick="initiateRazorpay()">
+          Pay Securely
         </button>
-        <button class="pay-method-btn" data-pay="upi">
-          <span class="pay-method-icon">₹</span>
-          UPI
-        </button>
-        <button class="pay-method-btn" data-pay="netbanking">
-          <span class="pay-method-icon">🏦</span>
-          Net Banking
-        </button>
-        <button class="pay-method-btn" data-pay="credit">
-          <span class="pay-method-icon">💳</span>
-          Credit Card
-        </button>
-        <button class="pay-method-btn" data-pay="debit">
-          <span class="pay-method-icon">🪙</span>
-          Debit Card
-        </button>
-      </div>
-
-      <!-- Payment panels -->
-      <div class="pay-panels" id="pay-panels-wrap">
-
-        <!-- Google Pay -->
-        <div class="pay-panel active" data-panel="gpay">
-          <p style="font-size:12px;color:rgba(19,17,17,0.5);margin-bottom:24px;line-height:1.7;">
-            You will be redirected to Google Pay to complete your payment securely.
-          </p>
-          <button class="gpay-btn" onclick="simulatePay()">
-            <span style="font-size:20px;font-weight:700;font-family:sans-serif;">
-              <span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span>
-            </span>
-            Pay
-          </button>
-        </div>
-
-        <!-- UPI -->
-        <div class="pay-panel" data-panel="upi">
-          <div class="upi-logos">
-            <div class="upi-logo">PhonePe</div>
-            <div class="upi-logo">Paytm</div>
-            <div class="upi-logo">BHIM</div>
-            <div class="upi-logo">GPay</div>
-          </div>
-          <div class="pay-field">
-            <label class="pay-label">UPI ID</label>
-            <input class="pay-input" type="text" placeholder="yourname@upi" id="upi-id">
-          </div>
-          <button class="pay-now-btn" onclick="simulatePay()">Verify &amp; Pay</button>
-        </div>
-
-        <!-- Net Banking -->
-        <div class="pay-panel" data-panel="netbanking">
-          <div class="pay-field">
-            <label class="pay-label">Select Your Bank</label>
-            <select class="pay-select" id="bank-select">
-              <option value="">Choose a bank</option>
-              <option>HDFC Bank</option>
-              <option>State Bank of India</option>
-              <option>ICICI Bank</option>
-              <option>Axis Bank</option>
-              <option>Kotak Mahindra Bank</option>
-              <option>Punjab National Bank</option>
-              <option>Bank of Baroda</option>
-              <option>Canara Bank</option>
-              <option>IndusInd Bank</option>
-              <option>Yes Bank</option>
-            </select>
-          </div>
-          <div class="pay-field">
-            <label class="pay-label">Registered Mobile / Customer ID</label>
-            <input class="pay-input" type="text" placeholder="Enter your ID">
-          </div>
-          <button class="pay-now-btn" onclick="simulatePay()">Proceed to Bank</button>
-        </div>
-
-        <!-- Credit Card -->
-        <div class="pay-panel" data-panel="credit">
-          <div class="pay-field">
-            <label class="pay-label">Card Number</label>
-            <input class="pay-input" type="text" placeholder="0000  0000  0000  0000" maxlength="19" id="cc-num">
-          </div>
-          <div class="pay-field">
-            <label class="pay-label">Cardholder Name</label>
-            <input class="pay-input" type="text" placeholder="Name on card">
-          </div>
-          <div class="pay-row">
-            <div class="pay-field">
-              <label class="pay-label">Expiry Date</label>
-              <input class="pay-input" type="text" placeholder="MM / YY" maxlength="7">
-            </div>
-            <div class="pay-field">
-              <label class="pay-label">CVV</label>
-              <input class="pay-input" type="password" placeholder="•••" maxlength="3">
-            </div>
-          </div>
-          <button class="pay-now-btn" onclick="simulatePay()">Pay Now</button>
-        </div>
-
-        <!-- Debit Card -->
-        <div class="pay-panel" data-panel="debit">
-          <div class="pay-field">
-            <label class="pay-label">Card Number</label>
-            <input class="pay-input" type="text" placeholder="0000  0000  0000  0000" maxlength="19">
-          </div>
-          <div class="pay-field">
-            <label class="pay-label">Cardholder Name</label>
-            <input class="pay-input" type="text" placeholder="Name on card">
-          </div>
-          <div class="pay-row">
-            <div class="pay-field">
-              <label class="pay-label">Expiry Date</label>
-              <input class="pay-input" type="text" placeholder="MM / YY" maxlength="7">
-            </div>
-            <div class="pay-field">
-              <label class="pay-label">CVV / PIN</label>
-              <input class="pay-input" type="password" placeholder="•••" maxlength="4">
-            </div>
-          </div>
-          <button class="pay-now-btn" onclick="simulatePay()">Pay Now</button>
-        </div>
-
+        <div id="pay-error" style="display:none;font-size:11px;color:#c0392b;margin-top:12px;text-align:center;"></div>
       </div>
 
       <!-- Success state (hidden initially) -->
@@ -1655,130 +1538,135 @@
       document.getElementById('payment-overlay').classList.remove('active');
     });
 
-    // Payment method tabs
-    document.querySelectorAll('.pay-method-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.pay;
-        document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.pay-panel').forEach(p => {
-          p.classList.toggle('active', p.dataset.panel === target);
-        });
-      });
-    });
 
-    // Card number formatting
-    document.getElementById('cc-num').addEventListener('input', e => {
-      let val = e.target.value.replace(/\D/g,'').slice(0,16);
-      e.target.value = val.match(/.{1,4}/g)?.join('  ') || val;
-    });
-
-    /* ── PAYMENT ─────────────────────────────────────────── */
-    function simulatePay() {
-      // Validate customer fields
-      const name  = document.getElementById('cust-name').value.trim();
-      const email = document.getElementById('cust-email').value.trim();
-      const phone = document.getElementById('cust-phone').value.trim();
+    /* ── RAZORPAY PAYMENT ────────────────────────────────── */
+    async function initiateRazorpay() {
+      const name    = document.getElementById('cust-name').value.trim();
+      const email   = document.getElementById('cust-email').value.trim();
+      const phone   = document.getElementById('cust-phone').value.trim();
       const address = document.getElementById('cust-address').value.trim();
-
-      let valid = true;
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const errEl   = document.getElementById('pay-error');
 
       document.getElementById('err-name').style.display  = 'none';
       document.getElementById('err-email').style.display = 'none';
+      errEl.style.display = 'none';
 
-      if (!name) {
-        document.getElementById('err-name').style.display = 'block';
-        document.getElementById('cust-name').focus();
-        valid = false;
-      }
-      if (!email || !emailRe.test(email)) {
-        document.getElementById('err-email').style.display = 'block';
-        if (valid) document.getElementById('cust-email').focus();
-        valid = false;
-      }
+      let valid = true;
+      if (!name)  { document.getElementById('err-name').style.display  = 'block'; valid = false; }
+      if (!email || !emailRe.test(email)) { document.getElementById('err-email').style.display = 'block'; valid = false; }
       if (!valid) return;
 
-      // Get active payment method
-      const activeMethod = document.querySelector('.pay-method-btn.active')?.dataset?.pay || 'online';
-
-      const btns = document.querySelectorAll('.pay-now-btn, .gpay-btn');
-      btns.forEach(b => { b.disabled = true; b.textContent = 'Processing...'; });
-
-      // Build order payload
       const totalINR = cart.reduce((s, i) => s + i.inr * i.qty, 0);
-      const orderPayload = {
-        customer: { name, email, phone, address },
-        items: cart.map(i => ({
-          id: i.id,
-          name: i.name,
-          category: i.category || null,
-          size: i.size || null,
-          qty: i.qty,
-          price: i.inr,
-        })),
-        total_inr: totalINR,
-        payment_method: activeMethod,
+      const btn = document.getElementById('razorpay-btn');
+      btn.disabled = true;
+      btn.textContent = 'Creating order…';
+
+      let rzpOrderId, rzpAmount, rzpKeyId;
+      try {
+        const r = await fetch('/api/razorpay-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount_inr: totalINR }),
+        });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Failed to create order');
+        rzpOrderId = d.order_id;
+        rzpAmount  = d.amount;
+        rzpKeyId   = d.key_id;
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Pay Securely';
+        errEl.textContent = 'Could not connect to payment gateway. Please try again.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      btn.textContent = 'Opening payment…';
+
+      const options = {
+        key:      rzpKeyId,
+        amount:   rzpAmount,
+        currency: 'INR',
+        order_id: rzpOrderId,
+        name:     'IVORY',
+        description: `Order of ${cart.reduce((s,i)=>s+i.qty,0)} item(s)`,
+        image:    '/brand_assets/ivory_logo_transparent.png',
+        prefill:  { name, email, contact: phone },
+        theme:    { color: '#131111' },
+        modal: {
+          ondismiss() {
+            btn.disabled = false;
+            btn.textContent = 'Pay Securely';
+          }
+        },
+        handler: async function(response) {
+          btn.textContent = 'Verifying…';
+          try {
+            const vr = await fetch('/api/razorpay-verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id:   response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature:  response.razorpay_signature,
+                customer: { name, email, phone, address },
+                items: cart.map(i => ({ id: i.id, name: i.name, category: i.category||null, size: i.size||null, qty: i.qty, price: i.inr })),
+                total_inr: totalINR,
+              }),
+            });
+            const vd = await vr.json();
+            showPaymentSuccess(email, vd.displayId);
+          } catch (err) {
+            showPaymentSuccess(email, null);
+          }
+        },
       };
 
-      // After processing delay, call backend and show success
-      setTimeout(async () => {
-        let displayId = '';
-        try {
-          const res = await fetch('/api/order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderPayload),
-          });
-          const data = await res.json();
-          if (data.displayId) displayId = data.displayId;
-        } catch (err) {
-          console.warn('Order API unavailable, proceeding offline:', err.message);
-        }
+      const rzp = new Razorpay(options);
+      rzp.on('payment.failed', function() {
+        btn.disabled = false;
+        btn.textContent = 'Pay Securely';
+        errEl.textContent = 'Payment failed. Please try again.';
+        errEl.style.display = 'block';
+      });
+      rzp.open();
+    }
 
-        // Show success regardless of API result
-        document.getElementById('pay-methods-wrap').style.display = 'none';
-        document.getElementById('pay-panels-wrap').style.display = 'none';
-        document.getElementById('payment-summary').style.display = 'none';
-        document.getElementById('pay-customer-section').style.display = 'none';
-        document.getElementById('payment-success').style.display = 'block';
-
-        if (displayId) {
-          document.getElementById('success-sub-text').innerHTML =
-            `Order <strong>#${displayId}</strong> confirmed.<br>Your IVORY essentials are on their way.<br>A confirmation has been sent to <strong>${email}</strong>.`;
-        }
-
-        cart = [];
-        updateCartUI();
-      }, 1800);
+    function showPaymentSuccess(email, displayId) {
+      document.getElementById('pay-panels-wrap').style.display = 'none';
+      document.getElementById('payment-summary').style.display = 'none';
+      document.getElementById('pay-customer-section').style.display = 'none';
+      document.getElementById('payment-success').style.display = 'block';
+      if (displayId) {
+        document.getElementById('success-sub-text').innerHTML =
+          `Order <strong>#${displayId}</strong> confirmed.<br>Your IVORY essentials are on their way.<br>A confirmation has been sent to <strong>${email}</strong>.`;
+      } else {
+        document.getElementById('success-sub-text').innerHTML =
+          `Thank you! Your payment was successful.<br>Your IVORY essentials are confirmed.<br>A confirmation has been sent to <strong>${email}</strong>.`;
+      }
+      cart = [];
+      updateCartUI();
     }
 
     function closePaymentSuccess() {
       document.getElementById('payment-overlay').classList.remove('active');
       setTimeout(() => {
-        document.getElementById('pay-methods-wrap').style.display = '';
         document.getElementById('pay-panels-wrap').style.display = '';
         document.getElementById('payment-summary').style.display = '';
         document.getElementById('pay-customer-section').style.display = '';
         document.getElementById('payment-success').style.display = 'none';
+        document.getElementById('pay-error').style.display = 'none';
         document.getElementById('success-sub-text').innerHTML =
           'Thank you for your order.<br>Your IVORY essentials are confirmed.<br>A confirmation has been sent to your email.';
-        // Reset customer fields
         ['cust-name','cust-email','cust-phone','cust-address'].forEach(id => {
           document.getElementById(id).value = '';
         });
         document.getElementById('err-name').style.display = 'none';
         document.getElementById('err-email').style.display = 'none';
-        document.querySelectorAll('.pay-now-btn, .gpay-btn').forEach(b => {
-          b.disabled = false;
-          if (b.classList.contains('gpay-btn')) b.innerHTML = 'Google Pay';
-          else b.textContent = 'Pay Now';
-        });
-        document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector('.pay-method-btn[data-pay="gpay"]').classList.add('active');
-        document.querySelectorAll('.pay-panel').forEach(p => {
-          p.classList.toggle('active', p.dataset.panel === 'gpay');
-        });
+        const btn = document.getElementById('razorpay-btn');
+        btn.disabled = false;
+        btn.textContent = 'Pay Securely';
       }, 400);
     }
 
@@ -1801,6 +1689,7 @@
       .catch(() => renderProducts()); // fallback: render with empty catalogue (server down)
     updateCartUI();
   </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
