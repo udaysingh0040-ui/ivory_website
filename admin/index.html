@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — IVORY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ebony: #131111;
+      --ivory: #FAFAF8;
+      --alabaster: #F0F0E8;
+      --warm: #E8D5C0;
+      --muted: rgba(19,17,17,0.45);
+      --border: rgba(19,17,17,0.1);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Raleway', sans-serif; font-weight: 300; background: var(--alabaster); color: var(--ebony); min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ── LOGIN ── */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ebony);
+    }
+    .login-box {
+      background: var(--ivory);
+      width: 360px;
+      padding: 48px 40px;
+    }
+    .login-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .login-sub {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .login-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .login-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      color: var(--ebony);
+      outline: none;
+      margin-bottom: 32px;
+      transition: border-color 0.2s ease;
+    }
+    .login-input:focus { border-bottom-color: var(--ebony); }
+    .login-btn {
+      width: 100%;
+      background: var(--ebony);
+      color: var(--ivory);
+      border: none;
+      padding: 16px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: opacity 0.2s ease;
+    }
+    .login-btn:hover { opacity: 0.8; }
+    .login-error {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #c0392b;
+      text-align: center;
+      display: none;
+    }
+
+    /* ── APP SHELL ── */
+    .app { display: none; min-height: 100vh; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 60px;
+      background: var(--ebony);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+    }
+    .topbar__left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .topbar__brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--ivory);
+    }
+    .topbar__nav { display: flex; gap: 0; }
+    .topbar__nav a { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,250,248,0.5); text-decoration: none; padding: 8px 16px; border: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .topbar__nav a:hover { color: var(--ivory); }
+    .topbar__nav a.active { color: var(--ivory); border-color: rgba(250,250,248,0.25); }
+    .topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .topbar__refresh {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      background: none;
+      border: 1px solid rgba(250,250,248,0.15);
+      padding: 7px 16px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .topbar__refresh:hover { border-color: var(--ivory); color: var(--ivory); }
+    .topbar__logout {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      background: none;
+      border: none;
+      transition: color 0.2s ease;
+    }
+    .topbar__logout:hover { color: var(--ivory); }
+    .topbar__live {
+      width: 7px; height: 7px;
+      background: #2ecc71;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── MAIN ── */
+    .main { padding: 80px 32px 48px; max-width: 1200px; margin: 0 auto; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--ivory);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .stat-card__label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .stat-card__value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-card__sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── CHART ── */
+    .chart-wrap {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .chart-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+    }
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .chart-bar {
+      width: 100%;
+      background: var(--ebony);
+      min-height: 2px;
+      transition: height 0.4s ease;
+    }
+    .chart-date {
+      font-size: 8px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 0;
+    }
+    .filter-tab {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-right: none;
+      padding: 9px 18px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .filter-tab:last-child { border-right: 1px solid var(--border); }
+    .filter-tab.active { background: var(--ebony); color: var(--ivory); border-color: var(--ebony); }
+    .filter-tab:hover:not(.active) { background: var(--alabaster); }
+    .orders-count { font-size: 11px; color: var(--muted); }
+
+    /* ── ORDERS TABLE ── */
+    .table-wrap {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { border-bottom: 2px solid var(--border); }
+    th {
+      font-size: 8.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 14px 16px;
+      text-align: left;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    td {
+      font-size: 12.5px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(19,17,17,0.06);
+      vertical-align: middle;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(19,17,17,0.02); }
+
+    .order-id {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .customer-name { font-weight: 400; }
+    .customer-email { font-size: 11px; color: var(--muted); }
+    .order-total { font-weight: 400; }
+    .items-list { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-block;
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 0;
+      font-weight: 500;
+    }
+    .status-badge.confirmed  { background: #e8f4e8; color: #2d6a2d; }
+    .status-badge.processing { background: #fff3e0; color: #8a5500; }
+    .status-badge.shipped    { background: #e3f0ff; color: #1a4a8a; }
+    .status-badge.delivered  { background: #e8e8e8; color: #444; }
+    .status-badge.cancelled  { background: #fde8e8; color: #8a1a1a; }
+
+    /* Status select */
+    .status-select {
+      font-family: 'Raleway', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--ivory);
+      padding: 6px 10px;
+      color: var(--ebony);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 130px;
+    }
+    .status-select:focus { border-color: var(--ebony); }
+    .status-select.saving { opacity: 0.5; }
+
+    /* ── EMPTY / LOADING STATES ── */
+    .loading-row td { text-align: center; padding: 48px; color: var(--muted); font-size: 12px; }
+    .empty-row td  { text-align: center; padding: 48px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGIN SCREEN ── -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-box">
+      <div class="login-brand">IVORY</div>
+      <div class="login-sub">Admin Dashboard</div>
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="loginPass" placeholder="Enter admin password" autocomplete="current-password">
+      <button class="login-btn" id="loginBtn">Access Dashboard</button>
+      <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- ── APP ── -->
+  <div class="app" id="app">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar__left">
+        <div class="topbar__brand">IVORY</div>
+        <nav class="topbar__nav">
+          <a href="/admin" class="active">Orders</a>
+          <a href="/admin/catalogue">Catalogue</a>
+        </nav>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__live" title="Live"></div>
+        <button class="topbar__refresh" onclick="loadAll()">Refresh</button>
+        <button class="topbar__logout" onclick="logout()">Log out</button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <!-- Stats bar -->
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-card">
+          <div class="stat-card__label">Today's Revenue</div>
+          <div class="stat-card__value" id="stat-today">—</div>
+          <div class="stat-card__sub" id="stat-today-count">— orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">7-Day Revenue</div>
+          <div class="stat-card__value" id="stat-week">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Pending</div>
+          <div class="stat-card__value" id="stat-pending">—</div>
+          <div class="stat-card__sub">Confirmed + Processing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Total Orders</div>
+          <div class="stat-card__value" id="stat-total">—</div>
+        </div>
+      </div>
+
+      <!-- 7-day chart -->
+      <div class="chart-wrap">
+        <div class="chart-title">Revenue — Last 7 Days</div>
+        <div class="chart-bars" id="chartBars"></div>
+      </div>
+
+      <!-- Filters + table -->
+      <div class="filters">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-status="all">All</button>
+          <button class="filter-tab" data-status="confirmed">Confirmed</button>
+          <button class="filter-tab" data-status="processing">Processing</button>
+          <button class="filter-tab" data-status="shipped">Shipped</button>
+          <button class="filter-tab" data-status="delivered">Delivered</button>
+          <button class="filter-tab" data-status="cancelled">Cancelled</button>
+        </div>
+        <span class="orders-count" id="ordersCount"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Date</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Payment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+            <tr class="loading-row"><td colspan="7">Loading orders…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let token = '';
+    let currentStatus = 'all';
+    let refreshInterval = null;
+
+    // ── AUTH ────────────────────────────────────────────────────
+    function login() {
+      const pass = document.getElementById('loginPass').value.trim();
+      if (!pass) return;
+      token = pass;
+      tryLoad();
+    }
+
+    async function tryLoad() {
+      const errEl = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Checking…';
+      try {
+        const res = await fetch('/api/stats', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.status === 401) {
+          errEl.textContent = 'Incorrect password. Please try again.';
+          errEl.style.display = 'block';
+          token = '';
+          return;
+        }
+        if (!res.ok) {
+          errEl.textContent = `Server error (${res.status}). Check the dev server is running.`;
+          errEl.style.display = 'block';
+          token = '';
+          return;
+        }
+        // Auth success
+        sessionStorage.setItem('ivory_admin_token', token);
+        document.getElementById('loginWrap').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        const stats = await res.json();
+        renderStats(stats);
+        await loadOrders();
+        refreshInterval = setInterval(loadAll, 60000);
+      } catch (err) {
+        errEl.textContent = 'Cannot reach server. Make sure it is running on localhost:3000.';
+        errEl.style.display = 'block';
+        token = '';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Access Dashboard';
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('ivory_admin_token');
+      token = '';
+      clearInterval(refreshInterval);
+      document.getElementById('loginWrap').style.display = 'flex';
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('loginPass').value = '';
+    }
+
+    async function loadAll() {
+      await Promise.all([loadStats(), loadOrders()]);
+    }
+
+    // ── STATS ────────────────────────────────────────────────────
+    async function loadStats() {
+      const res = await fetch('/api/stats', { headers: { 'Authorization': `Bearer ${token}` } });
+      if (!res.ok) return;
+      renderStats(await res.json());
+    }
+
+    function renderStats(s) {
+      const fmt = n => '₹' + Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+      document.getElementById('stat-today').textContent = fmt(s.todayRevenue);
+      document.getElementById('stat-today-count').textContent = `${s.todayCount} order${s.todayCount !== 1 ? 's' : ''}`;
+      document.getElementById('stat-week').textContent = fmt(s.weekRevenue);
+      const pending = (s.statusCounts?.confirmed || 0) + (s.statusCounts?.processing || 0);
+      document.getElementById('stat-pending').textContent = pending;
+      const total = Object.values(s.statusCounts || {}).reduce((a, b) => a + b, 0);
+      document.getElementById('stat-total').textContent = total;
+
+      // Chart
+      if (s.dailyChart?.length) {
+        const max = Math.max(...s.dailyChart.map(d => d.revenue), 1);
+        document.getElementById('chartBars').innerHTML = s.dailyChart.map(d => {
+          const h = Math.max(2, Math.round((d.revenue / max) * 72));
+          const label = new Date(d.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short' });
+          return `<div class="chart-col">
+            <div class="chart-bar" style="height:${h}px;" title="₹${Number(d.revenue).toLocaleString('en-IN')}"></div>
+            <div class="chart-date">${label}</div>
+          </div>`;
+        }).join('');
+      }
+    }
+
+    // ── ORDERS ───────────────────────────────────────────────────
+    async function loadOrders() {
+      document.getElementById('ordersBody').innerHTML =
+        '<tr class="loading-row"><td colspan="7">Loading…</td></tr>';
+
+      const url = currentStatus === 'all'
+        ? '/api/orders?limit=100'
+        : `/api/orders?status=${currentStatus}&limit=100`;
+
+      const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (!res.ok) return;
+      const { orders } = await res.json();
+      renderOrders(orders || []);
+    }
+
+    function renderOrders(orders) {
+      document.getElementById('ordersCount').textContent = `${orders.length} order${orders.length !== 1 ? 's' : ''}`;
+
+      if (!orders.length) {
+        document.getElementById('ordersBody').innerHTML =
+          '<tr class="empty-row"><td colspan="7">No orders found.</td></tr>';
+        return;
+      }
+
+      document.getElementById('ordersBody').innerHTML = orders.map(o => {
+        const displayId = o.id.replace(/-/g, '').slice(0, 8).toUpperCase();
+        const date = new Date(o.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        const time = new Date(o.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        const itemsSummary = (o.order_items || []).map(i => `${i.quantity}× ${i.product_name}${i.size ? ` (${i.size})` : ''}`).join('<br>');
+        const total = '₹' + Number(o.total_inr).toLocaleString('en-IN');
+        const statuses = ['confirmed', 'processing', 'shipped', 'delivered', 'cancelled'];
+
+        return `<tr>
+          <td><div class="order-id">#${displayId}</div></td>
+          <td><div style="font-size:12px;">${date}</div><div style="font-size:11px;color:var(--muted);">${time}</div></td>
+          <td>
+            <div class="customer-name">${o.customers?.name || '—'}</div>
+            <div class="customer-email">${o.customers?.email || ''}</div>
+            ${o.customers?.phone ? `<div class="customer-email">${o.customers.phone}</div>` : ''}
+          </td>
+          <td><div class="items-list">${itemsSummary || '—'}</div></td>
+          <td><div class="order-total">${total}</div></td>
+          <td style="font-size:11px;color:var(--muted);">${o.payment_method || '—'}</td>
+          <td>
+            <select class="status-select" data-order-id="${o.id}" onchange="updateStatus(this)">
+              ${statuses.map(s => `<option value="${s}" ${s === o.status ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`).join('')}
+            </select>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    async function updateStatus(select) {
+      const orderId = select.dataset.orderId;
+      const status = select.value;
+      select.classList.add('saving');
+      select.disabled = true;
+
+      const res = await fetch('/api/orders', {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId, status }),
+      });
+
+      select.classList.remove('saving');
+      select.disabled = false;
+
+      if (!res.ok) {
+        alert('Failed to update status. Please try again.');
+        await loadOrders();
+      }
+    }
+
+    // ── FILTER TABS ──────────────────────────────────────────────
+    document.getElementById('filterTabs').addEventListener('click', e => {
+      const tab = e.target.closest('.filter-tab');
+      if (!tab) return;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentStatus = tab.dataset.status;
+      loadOrders();
+    });
+
+    // ── LOGIN EVENTS ─────────────────────────────────────────────
+    document.getElementById('loginBtn').addEventListener('click', login);
+    document.getElementById('loginPass').addEventListener('keydown', e => {
+      if (e.key === 'Enter') login();
+    });
+
+    // Auto-login from session
+    const savedToken = sessionStorage.getItem('ivory_admin_token');
+    if (savedToken) {
+      token = savedToken;
+      tryLoad();
+    }
+  </script>
+</body>
+</html>

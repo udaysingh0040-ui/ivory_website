@@ -1,0 +1,11 @@
+{
+  "name": "ivory-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "@vercel/analytics": "^1.6.1",
+    "resend": "^3.2.0"
+  }
+}

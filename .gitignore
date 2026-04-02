@@ -4,6 +4,11 @@ temporary screenshots/
 # Sensitive data files
 contacts.csv
 orders.csv
+.env
+.env.local
+
+# Node
+node_modules/
 
 # Reference/working files (not part of the live site)
 about webpage/
@@ -15,6 +20,9 @@ CLAUDE.md
 
 # Vercel CLI config (contains project IDs, not needed in repo)
 .vercel/
+
+# MCP config (contains access tokens)
+.mcp.json
 
 # Dev tooling (optional — remove if you want these in the repo)
 screenshot.mjs

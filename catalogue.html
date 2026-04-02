@@ -1018,6 +1018,39 @@
       .product-grid { grid-template-columns: repeat(2, 1fr); }
       .cart-drawer { width: 100% !important; }
       .footer { grid-template-columns: 1fr; padding: 40px 20px; gap: 32px; }
+      .pay-customer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CUSTOMER INFO FIELDS ───────────────────────────── */
+    .pay-customer-section {
+      padding: 20px 28px 0;
+      border-bottom: 1px solid rgba(19,17,17,0.08);
+      margin-bottom: 4px;
+    }
+    .pay-customer-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.4);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .pay-customer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 20px;
+    }
+    .pay-customer-field {
+      margin-bottom: 18px;
+    }
+    .pay-customer-field.full { grid-column: span 2; }
+    .pay-customer-field .pay-label { font-size: 8.5px; }
+    .pay-customer-field .pay-input { font-size: 12.5px; }
+    .pay-field-error {
+      font-size: 10px;
+      color: #c0392b;
+      margin-top: 4px;
+      display: none;
     }
   </style>
 </head>
@@ -1174,6 +1207,31 @@
         <span class="payment-summary__amount" id="pay-total-display">₹0</span>
       </div>
 
+      <!-- Customer info -->
+      <div class="pay-customer-section" id="pay-customer-section">
+        <div class="pay-customer-title">Your Details</div>
+        <div class="pay-customer-grid">
+          <div class="pay-customer-field">
+            <label class="pay-label">Full Name *</label>
+            <input class="pay-input" type="text" id="cust-name" placeholder="Your full name" autocomplete="name">
+            <div class="pay-field-error" id="err-name">Please enter your name</div>
+          </div>
+          <div class="pay-customer-field">
+            <label class="pay-label">Email Address *</label>
+            <input class="pay-input" type="email" id="cust-email" placeholder="your@email.com" autocomplete="email">
+            <div class="pay-field-error" id="err-email">Please enter a valid email</div>
+          </div>
+          <div class="pay-customer-field">
+            <label class="pay-label">Phone Number</label>
+            <input class="pay-input" type="tel" id="cust-phone" placeholder="+91 98765 43210" autocomplete="tel">
+          </div>
+          <div class="pay-customer-field full" style="grid-column:span 2;">
+            <label class="pay-label">Shipping Address</label>
+            <input class="pay-input" type="text" id="cust-address" placeholder="Street, City, State, PIN" autocomplete="street-address">
+          </div>
+        </div>
+      </div>
+
       <!-- Payment method tabs -->
       <div class="pay-methods" id="pay-methods-wrap">
         <button class="pay-method-btn active" data-pay="gpay">
@@ -1306,10 +1364,10 @@
       <div id="payment-success">
         <div class="success-ring">✓</div>
         <h3 class="success-heading">Payment Successful</h3>
-        <p class="success-sub">
+        <p class="success-sub" id="success-sub-text">
           Thank you for your order.<br>
           Your IVORY essentials are confirmed.<br>
-          A receipt has been sent to your email.
+          A confirmation has been sent to your email.
         </p>
         <button class="success-done-btn" onclick="closePaymentSuccess()">Continue Shopping</button>
       </div>
@@ -1317,51 +1375,18 @@
   </div>
 
   <script>
-    /* ── CATALOGUE DATA ─────────────────────────────────── */
-    const catalogue = {
-      men: {
-        upper: [
-          { id:'mu1', name:'Cotton Dress Shirt',       photo:'catalogue/men/upper/cotton_shirt_men.jpg',            inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu2', name:'Cotton Half-Sleeve Shirt', photo:'catalogue/men/upper/cotton_half_sleeve_shirt.jpg',     inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu3', name:'Linen Dress Shirt',        photo:'catalogue/men/upper/linen_shirt_men.jpg',              inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu4', name:'Premium White T-Shirt',    photo:'catalogue/men/upper/cotton_white_tshirt.jpg',          inr:799,  usd:9,  sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu5', name:'Relaxed Cotton Shirt',     photo:'catalogue/men/upper/loose_cotton_men%20shirt.jpg',     inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu6', name:'Relaxed Linen Shirt',      photo:'catalogue/men/upper/loose_linen_shirt_men.jpg',        inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu7', name:'Linen Short-Sleeve Shirt', photo:'catalogue/men/upper/short_sleeve_lenin_shirt.jpg',     inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-          { id:'mu8', name:'Linen Short-Sleeve II',    photo:'catalogue/men/upper/short_sleeve_lenin_shirt_2.jpg',   inr:2499, usd:28, sizes:['XS','S','M','L','XL','XXL'] },
-        ],
-        bottom: [
-          { id:'mb1', name:'Cotton Tailored Trousers', photo:'catalogue/men/bottom/cotton_pant.jpg',         inr:3399, usd:38, sizes:['28','30','32','34','36','38'] },
-          { id:'mb2', name:'Korean Style Trousers',    photo:'catalogue/men/bottom/korean_style_pant.jpg',   inr:3399, usd:38, sizes:['28','30','32','34','36','38'] },
-          { id:'mb3', name:'Linen Tailored Trousers',  photo:'catalogue/men/bottom/lenin_pant.jpg',          inr:3399, usd:38, sizes:['28','30','32','34','36','38'] },
-          { id:'mb4', name:'Linen Relaxed Chinos',     photo:'catalogue/men/bottom/lenin_pant_style_2.jpg',  inr:3399, usd:38, sizes:['28','30','32','34','36','38'] },
-        ]
-      },
-      women: {
-        upper: [
-          { id:'wu1', name:'Cotton Classic Shirt',     photo:'catalogue/women/upper/cotton_shirt_style_1.jpg',        inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu2', name:'Cotton Half-Sleeve Shirt', photo:'catalogue/women/upper/cotton_half_sleeve_shirt.jpg',    inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu3', name:'Relaxed Cotton Shirt',     photo:'catalogue/women/upper/cotton_shirt_style_3.jpg',        inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu4', name:'White Cotton Shirt',       photo:'catalogue/women/upper/cotton_white_shirt_style_2.jpg',  inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu5', name:'Linen Half-Sleeve Shirt',  photo:'catalogue/women/upper/linen_half_sleeve_shirt.jpg',     inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu6', name:'Linen Classic Shirt',      photo:'catalogue/women/upper/linen_shirt_style_1.jpg',         inr:2499, usd:28, sizes:['XS','S','M','L','XL'] },
-          { id:'wu7', name:'Premium White T-Shirt',    photo:'catalogue/women/upper/woman_white_tshirt.jpg',          inr:799,  usd:9,  sizes:['XS','S','M','L','XL'] },
-        ],
-        bottom: [
-          { id:'wb1', name:'Cotton Tailored Pants',    photo:'catalogue/women/bottom/cotton_pants.jpg',               inr:3399, usd:38, sizes:['24','26','28','30','32','34'] },
-          { id:'wb2', name:'Korean Style Pants',       photo:'catalogue/women/bottom/korean_style_cotton_pants.jpg',  inr:3399, usd:38, sizes:['24','26','28','30','32','34'] },
-          { id:'wb3', name:'Linen Straight Pants',     photo:'catalogue/women/bottom/lenin_pants_style_1.jpg',        inr:3399, usd:38, sizes:['24','26','28','30','32','34'] },
-          { id:'wb4', name:'Palazzo Linen Pants',      photo:'catalogue/women/bottom/plazo_lenin_pants.jpg',          inr:3399, usd:38, sizes:['24','26','28','30','32','34'] },
-        ]
-      },
-      towels: [
-        { id:'tw1', name:'Grand Bath Sheet',      photo:'catalogue/towels/bath_sheets.jpg',        inr:1250, usd:21.50, sizes:[] },
-        { id:'tw2', name:'Signature Bath Towel',  photo:'catalogue/towels/bath_towel.jpg',         inr:850,  usd:14.25, sizes:[] },
-        { id:'tw3', name:'Guest Hand Towel',      photo:'catalogue/towels/hand_towel.jpg',         inr:275,  usd:4.85,  sizes:[] },
-        { id:'tw4', name:'Facial Washcloth',      photo:'catalogue/towels/facial_wash_cloth.jpg',  inr:110,  usd:1.95,  sizes:[] },
-        { id:'tw5', name:'Sculpted Bath Mat',     photo:'catalogue/towels/bath_mat.jpg',           inr:450,  usd:7.50,  sizes:[] },
-      ]
-    };
+    /* ── CATALOGUE DATA — loaded from API ───────────────── */
+    let catalogue = { men: { upper: [], bottom: [] }, women: { upper: [], bottom: [] }, towels: [] };
+
+    function buildCatalogue(products) {
+      const cat = { men: { upper: [], bottom: [] }, women: { upper: [], bottom: [] }, towels: [] };
+      for (const p of products) {
+        const item = { id: p.id, name: p.name, photo: p.photo, inr: Number(p.price_inr), usd: Number(p.price_usd), sizes: p.sizes || [], in_stock: p.in_stock !== false };
+        if (p.category === 'towels') { cat.towels.push(item); }
+        else if (p.subcategory && cat[p.category]?.[p.subcategory]) { cat[p.category][p.subcategory].push(item); }
+      }
+      return cat;
+    }
 
     /* ── STATE ───────────────────────────────────────────── */
     let activeCategory = 'men';
@@ -1392,8 +1417,9 @@
       setTimeout(() => {
         const products = getProducts();
         grid.innerHTML = products.map((p, i) => {
+          const soldOut = p.in_stock === false;
           const hasSizes = p.sizes.length > 0;
-          const sizesHtml = hasSizes
+          const sizesHtml = hasSizes && !soldOut
             ? `<span class="size-label">Select Size</span>
                <div class="sizes-row" id="sizes-${p.id}">
                  ${p.sizes.map(s => `<button class="size-btn" data-product="${p.id}" data-size="${s}">${s}</button>`).join('')}
@@ -1401,9 +1427,10 @@
             : '';
 
           return `
-            <div class="product-card" data-product-id="${p.id}">
+            <div class="product-card${soldOut ? ' sold-out' : ''}" data-product-id="${p.id}">
               <div class="product-card__img-wrap">
                 <img class="product-card__img" src="${p.photo}" alt="${p.name}" loading="lazy">
+                ${soldOut ? '<div style="position:absolute;inset:0;background:rgba(19,17,17,0.45);display:flex;align-items:center;justify-content:center;"><span style="color:#FAFAF8;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;font-family:Raleway,sans-serif;">Sold Out</span></div>' : ''}
                 <div class="product-card__overlay">
                   <div class="product-card__quick">
                     <div class="overlay-price">
@@ -1411,8 +1438,8 @@
                       <span class="overlay-price__usd">${fmtUSD(p.usd)}</span>
                     </div>
                     ${sizesHtml}
-                    <button class="atc-btn" id="atc-${p.id}" data-product-id="${p.id}">
-                      Add to Cart
+                    <button class="atc-btn" id="atc-${p.id}" data-product-id="${p.id}" ${soldOut ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>
+                      ${soldOut ? 'Sold Out' : 'Add to Cart'}
                     </button>
                   </div>
                 </div>
@@ -1646,18 +1673,81 @@
       e.target.value = val.match(/.{1,4}/g)?.join('  ') || val;
     });
 
-    /* ── PAYMENT SIMULATION ──────────────────────────────── */
+    /* ── PAYMENT ─────────────────────────────────────────── */
     function simulatePay() {
+      // Validate customer fields
+      const name  = document.getElementById('cust-name').value.trim();
+      const email = document.getElementById('cust-email').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const address = document.getElementById('cust-address').value.trim();
+
+      let valid = true;
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      document.getElementById('err-name').style.display  = 'none';
+      document.getElementById('err-email').style.display = 'none';
+
+      if (!name) {
+        document.getElementById('err-name').style.display = 'block';
+        document.getElementById('cust-name').focus();
+        valid = false;
+      }
+      if (!email || !emailRe.test(email)) {
+        document.getElementById('err-email').style.display = 'block';
+        if (valid) document.getElementById('cust-email').focus();
+        valid = false;
+      }
+      if (!valid) return;
+
+      // Get active payment method
+      const activeMethod = document.querySelector('.pay-method-btn.active')?.dataset?.pay || 'online';
+
       const btns = document.querySelectorAll('.pay-now-btn, .gpay-btn');
       btns.forEach(b => { b.disabled = true; b.textContent = 'Processing...'; });
 
-      setTimeout(() => {
+      // Build order payload
+      const totalINR = cart.reduce((s, i) => s + i.inr * i.qty, 0);
+      const orderPayload = {
+        customer: { name, email, phone, address },
+        items: cart.map(i => ({
+          id: i.id,
+          name: i.name,
+          category: i.category || null,
+          size: i.size || null,
+          qty: i.qty,
+          price: i.inr,
+        })),
+        total_inr: totalINR,
+        payment_method: activeMethod,
+      };
+
+      // After processing delay, call backend and show success
+      setTimeout(async () => {
+        let displayId = '';
+        try {
+          const res = await fetch('/api/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderPayload),
+          });
+          const data = await res.json();
+          if (data.displayId) displayId = data.displayId;
+        } catch (err) {
+          console.warn('Order API unavailable, proceeding offline:', err.message);
+        }
+
+        // Show success regardless of API result
         document.getElementById('pay-methods-wrap').style.display = 'none';
         document.getElementById('pay-panels-wrap').style.display = 'none';
         document.getElementById('payment-summary').style.display = 'none';
+        document.getElementById('pay-customer-section').style.display = 'none';
         document.getElementById('payment-success').style.display = 'block';
 
-        // Clear cart
+        if (displayId) {
+          document.getElementById('success-sub-text').innerHTML =
+            `Order <strong>#${displayId}</strong> confirmed.<br>Your IVORY essentials are on their way.<br>A confirmation has been sent to <strong>${email}</strong>.`;
+        }
+
         cart = [];
         updateCartUI();
       }, 1800);
@@ -1665,12 +1755,20 @@
 
     function closePaymentSuccess() {
       document.getElementById('payment-overlay').classList.remove('active');
-      // Reset modal state
       setTimeout(() => {
         document.getElementById('pay-methods-wrap').style.display = '';
         document.getElementById('pay-panels-wrap').style.display = '';
         document.getElementById('payment-summary').style.display = '';
+        document.getElementById('pay-customer-section').style.display = '';
         document.getElementById('payment-success').style.display = 'none';
+        document.getElementById('success-sub-text').innerHTML =
+          'Thank you for your order.<br>Your IVORY essentials are confirmed.<br>A confirmation has been sent to your email.';
+        // Reset customer fields
+        ['cust-name','cust-email','cust-phone','cust-address'].forEach(id => {
+          document.getElementById(id).value = '';
+        });
+        document.getElementById('err-name').style.display = 'none';
+        document.getElementById('err-email').style.display = 'none';
         document.querySelectorAll('.pay-now-btn, .gpay-btn').forEach(b => {
           b.disabled = false;
           if (b.classList.contains('gpay-btn')) b.innerHTML = 'Google Pay';
@@ -1691,9 +1789,18 @@
       document.body.classList.toggle('menu-open');
     }
 
-    /* ── INIT ────────────────────────────────────────────── */
-    renderProducts();
+    /* ── INIT — fetch products from API ─────────────────── */
+    fetch('/api/products')
+      .then(r => r.json())
+      .then(({ products }) => {
+        if (products && products.length) {
+          catalogue = buildCatalogue(products);
+        }
+        renderProducts();
+      })
+      .catch(() => renderProducts()); // fallback: render with empty catalogue (server down)
     updateCartUI();
   </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

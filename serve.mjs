@@ -4,6 +4,22 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// ── Load .env ────────────────────────────────────────────────
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, 'utf8').split('\n').forEach(line => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) return;
+    const eq = trimmed.indexOf('=');
+    if (eq === -1) return;
+    const key = trimmed.slice(0, eq).trim();
+    const val = trimmed.slice(eq + 1).trim();
+    if (key && !(key in process.env)) process.env[key] = val;
+  });
+  console.log('[env] .env loaded');
+}
+
 const PORT = 3000;
 const ORDERS_FILE = path.join(__dirname, 'orders.csv');
 const CSV_HEADERS = 'Timestamp,Fabric,Name,Email,Phone,Quantity,Country\n';
@@ -62,7 +78,66 @@ function readBody(req) {
   });
 }
 
+// ── Vercel-style response adapter ───────────────────────────
+function makeVercelRes(res) {
+  let statusCode = 200;
+  const vres = {
+    _raw: res,
+    status(code) { statusCode = code; return vres; },
+    setHeader(k, v) { res.setHeader(k, v); return vres; },
+    json(data) {
+      res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(data));
+    },
+    end(data) {
+      res.writeHead(statusCode);
+      res.end(data || '');
+    },
+  };
+  return vres;
+}
+
 http.createServer(async (req, res) => {
+  const urlObj = new URL(req.url, `http://localhost:${PORT}`);
+  const pathname = urlObj.pathname;
+
+  // ── GET/PATCH /api/stats ─────────────────────────────
+  if (pathname === '/api/stats') {
+    const { default: handler } = await import('./api/stats.js');
+    const vreq = Object.assign(req, { query: Object.fromEntries(urlObj.searchParams) });
+    return handler(vreq, makeVercelRes(res));
+  }
+
+  // ── GET/PATCH /api/orders ────────────────────────────
+  if (pathname === '/api/orders') {
+    const raw = req.method === 'PATCH' || req.method === 'POST' ? await readBody(req) : '';
+    const body = raw ? JSON.parse(raw) : {};
+    const { default: handler } = await import('./api/orders.js');
+    const vreq = Object.assign(req, {
+      query: Object.fromEntries(urlObj.searchParams),
+      body,
+    });
+    return handler(vreq, makeVercelRes(res));
+  }
+
+  // ── /api/products (CRUD) ─────────────────────────────
+  if (pathname === '/api/products') {
+    const raw = ['POST','PATCH','DELETE'].includes(req.method) ? await readBody(req) : '';
+    const body = raw ? JSON.parse(raw) : {};
+    const { default: handler } = await import('./api/products.js');
+    const vreq = Object.assign(req, { query: Object.fromEntries(urlObj.searchParams), body });
+    return handler(vreq, makeVercelRes(res));
+  }
+
+  // ── POST /api/order (catalogue checkout → Supabase) ──
+  if (pathname === '/api/order' && req.method === 'POST') {
+    const raw = await readBody(req);
+    const body = raw ? JSON.parse(raw) : {};
+    const { default: handler } = await import('./api/order.js');
+    const vreq = Object.assign(req, { query: {}, body });
+    return handler(vreq, makeVercelRes(res));
+  }
+
   // ── POST /api/contact ───────────────────────────────
   if (req.method === 'POST' && req.url === '/api/contact') {
     try {
@@ -142,6 +217,14 @@ http.createServer(async (req, res) => {
   // ── Static file serving ─────────────────────────────
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
   let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath);
+  // No extension: try <path>.html first, then <path>/index.html
+  if (!path.extname(filePath)) {
+    if (fs.existsSync(filePath + '.html')) {
+      filePath = filePath + '.html';
+    } else {
+      filePath = path.join(filePath, 'index.html');
+    }
+  }
   const ext = path.extname(filePath).toLowerCase();
 
   fs.readFile(filePath, (err, data) => {
