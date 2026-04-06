@@ -168,6 +168,7 @@ http.createServer(async (req, res) => {
         return;
       }
 
+      // Save to CSV backup
       const row = [
         new Date().toISOString(),
         data.name,
@@ -175,9 +176,62 @@ http.createServer(async (req, res) => {
         data.subject || 'General Enquiry',
         data.message,
       ].map(escapeCSV).join(',') + '\n';
-
       fs.appendFileSync(CONTACTS_FILE, row, 'utf8');
       console.log(`[CONTACT] ${data.name} | ${data.subject} → saved to contacts.csv`);
+
+      // Send email to support.ivory@gmail.com via Resend
+      try {
+        const subject = data.subject || 'General Enquiry';
+        const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+        const resendKey = process.env.RESEND_API_KEY;
+
+        if (resendKey) {
+          const emailResp = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${resendKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              from: 'IVORY Website <onboarding@resend.dev>',
+              to: ['support.ivory@gmail.com'],
+              reply_to: data.email,
+              subject: `[IVORY Contact] ${subject} — ${data.name}`,
+              html: `
+                <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:32px;background:#FAFAF8;color:#131111;">
+                  <div style="border-bottom:1px solid #e0e0d8;padding-bottom:20px;margin-bottom:28px;">
+                    <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin:0 0 8px;">IVORY Heritage — Contact Form</p>
+                    <h2 style="font-size:22px;font-weight:400;margin:0;letter-spacing:0.04em;">${subject}</h2>
+                  </div>
+                  <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.7;">
+                    <tr><td style="padding:8px 0;color:#888;width:120px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Name</td><td style="padding:8px 0;font-weight:500;">${data.name}</td></tr>
+                    <tr><td style="padding:8px 0;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Email</td><td style="padding:8px 0;"><a href="mailto:${data.email}" style="color:#131111;">${data.email}</a></td></tr>
+                    <tr><td style="padding:8px 0;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Subject</td><td style="padding:8px 0;">${subject}</td></tr>
+                    <tr><td style="padding:8px 0;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Time</td><td style="padding:8px 0;">${timestamp} IST</td></tr>
+                  </table>
+                  <div style="margin-top:24px;padding:20px;background:#F0F0E8;border-left:2px solid #131111;">
+                    <p style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 10px;">Message</p>
+                    <p style="font-size:15px;line-height:1.75;margin:0;white-space:pre-wrap;">${data.message}</p>
+                  </div>
+                  <div style="margin-top:32px;padding-top:20px;border-top:1px solid #e0e0d8;font-size:10px;color:#aaa;letter-spacing:0.1em;text-transform:uppercase;">
+                    IVORY Heritage &middot; support.ivory@gmail.com &middot; Crafted in India
+                  </div>
+                </div>
+              `,
+            }),
+          });
+          const emailData = await emailResp.json();
+          if (emailResp.ok) {
+            console.log(`[CONTACT] Email sent via Resend, id:`, emailData.id);
+          } else {
+            console.warn('[CONTACT] Resend error:', JSON.stringify(emailData).substring(0, 120));
+          }
+        } else {
+          console.warn('[CONTACT] RESEND_API_KEY not set — email skipped');
+        }
+      } catch (emailErr) {
+        console.warn('[CONTACT] Email failed:', emailErr.message.substring(0, 80));
+      }
 
       res.writeHead(200, {
         'Content-Type': 'application/json',

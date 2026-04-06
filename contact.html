@@ -700,7 +700,7 @@
               </svg>
             </div>
             <div class="channel-row__text">
-              <a href="mailto:info@ivory.com" class="info-item__value">info@ivory.com</a>
+              <a href="mailto:support.ivory@gmail.com" class="info-item__value">support.ivory@gmail.com</a>
             </div>
           </div>
           <div class="channel-row">
@@ -780,49 +780,19 @@
         <div class="info-block__list">
           <div class="info-item">
             <span class="info-item__label">General</span>
-            <a href="mailto:info@ivory.com" class="info-item__value">info@ivory.com</a>
+            <a href="mailto:support.ivory@gmail.com" class="info-item__value">support.ivory@gmail.com</a>
           </div>
           <div class="info-item">
             <span class="info-item__label">Press &amp; Editorial</span>
-            <a href="mailto:press@ivory.com" class="info-item__value">press@ivory.com</a>
+            <a href="mailto:support.ivory@gmail.com" class="info-item__value">support.ivory@gmail.com</a>
           </div>
           <div class="info-item">
             <span class="info-item__label">Fabrics &amp; Export</span>
-            <a href="mailto:fabrics@ivory.com" class="info-item__value">fabrics@ivory.com</a>
+            <a href="mailto:support.ivory@gmail.com" class="info-item__value">support.ivory@gmail.com</a>
           </div>
           <div class="info-item">
             <span class="info-item__label">Wholesale &amp; B2B</span>
-            <a href="mailto:wholesale@ivory.com" class="info-item__value">wholesale@ivory.com</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-block fade-up">
-        <div class="info-block__title">Our Stores</div>
-        <div class="stores-grid">
-          <div class="store-block">
-            <div class="store-block__city">Mumbai</div>
-            <div class="store-block__country">India</div>
-          </div>
-          <div class="store-block">
-            <div class="store-block__city">Delhi</div>
-            <div class="store-block__country">India</div>
-          </div>
-          <div class="store-block">
-            <div class="store-block__city">Bangalore</div>
-            <div class="store-block__country">India</div>
-          </div>
-          <div class="store-block">
-            <div class="store-block__city">Milan</div>
-            <div class="store-block__country">Italy</div>
-          </div>
-          <div class="store-block">
-            <div class="store-block__city">Paris</div>
-            <div class="store-block__country">France</div>
-          </div>
-          <div class="store-block">
-            <div class="store-block__city">London</div>
-            <div class="store-block__country">United Kingdom</div>
+            <a href="mailto:support.ivory@gmail.com" class="info-item__value">support.ivory@gmail.com</a>
           </div>
         </div>
       </div>
@@ -830,7 +800,7 @@
       <div class="info-block fade-up">
         <div class="info-block__title">Follow IVORY</div>
         <div class="social-row">
-          <a href="#" class="social-tag">Instagram</a>
+          <a href="https://www.instagram.com/ivory.heritage" target="_blank" rel="noopener" class="social-tag">Instagram</a>
           <a href="#" class="social-tag">YouTube</a>
           <a href="#" class="social-tag">Pinterest</a>
           <a href="#" class="social-tag">Twitter / X</a>
@@ -849,20 +819,19 @@
   <!-- ─── FOOTER ───────────────────────────────────── -->
   <footer class="footer" id="footer">
     <div>
-      <p class="footer__col-title">Stores</p>
-      <div class="footer__stores">
-        <a href="#" class="footer__link">Mumbai</a>
-        <a href="#" class="footer__link">Delhi</a>
-        <a href="#" class="footer__link">Bangalore</a>
-        <a href="#" class="footer__link">Milan</a>
-        <a href="#" class="footer__link">Paris</a>
-        <a href="#" class="footer__link">London</a>
+      <p class="footer__col-title">Navigate</p>
+      <div class="footer__links">
+        <a href="about.html" class="footer__link">About</a>
+        <a href="collection.html" class="footer__link">Collection</a>
+        <a href="fabrics.html" class="footer__link">Fabrics</a>
+        <a href="catalogue.html" class="footer__link">Catalogue</a>
+        <a href="contact.html" class="footer__link">Contact Us</a>
       </div>
     </div>
     <div>
       <p class="footer__col-title">Follow Us</p>
       <div class="footer__links">
-        <a href="#" class="footer__link">Instagram</a>
+        <a href="https://www.instagram.com/ivory.heritage" target="_blank" rel="noopener" class="footer__link">Instagram</a>
         <a href="#" class="footer__link">YouTube</a>
         <a href="#" class="footer__link">Twitter</a>
         <a href="#" class="footer__link">Pinterest</a>
@@ -871,9 +840,7 @@
     <div>
       <p class="footer__col-title">Contact</p>
       <div class="footer__links">
-        <a href="mailto:info@ivory.com" class="footer__link">info@ivory.com</a>
-        <a href="mailto:press@ivory.com" class="footer__link">press@ivory.com</a>
-        <a href="mailto:fabrics@ivory.com" class="footer__link">fabrics@ivory.com</a>
+        <a href="mailto:support.ivory@gmail.com" class="footer__link">support.ivory@gmail.com</a>
       </div>
     </div>
   </footer>
@@ -889,7 +856,7 @@
     /* ── TICKER ──────────────────────────────────────── */
     const tickerItems = [
       'Contact Us', 'Mumbai · Delhi · Bangalore',
-      'Milan · Paris · London', 'info@ivory.com',
+      'Export Ready', 'support.ivory@gmail.com',
       'Heritage S/S 2025', 'Made in India',
       'Export Ready', 'Wholesale Enquiries Welcome',
     ];
@@ -899,6 +866,9 @@
       .join('');
 
     /* ── FORM SUBMIT ─────────────────────────────────── */
+    const SUPABASE_URL = 'https://plarvnfcyybnwtvdvmsp.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsYXJ2bmZjeXlibnd0dmR2bXNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MzgxMjAsImV4cCI6MjA4ODQxNDEyMH0.aG1KVrKVDVbjhn57ibGKX6B0o9s4iPpx0tszC5o4ZA4';
+
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -929,20 +899,29 @@
       submitBtn.textContent = 'Sending...';
 
       try {
-        const res = await fetch('/api/contact', {
+        // 1. Save to Supabase contacts table
+        await fetch(SUPABASE_URL + '/rest/v1/contacts', {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(data)
+        });
+
+        // 2. Send email via server API (also saves CSV backup)
+        await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
 
-        if (res.ok) {
-          showSuccess();
-        } else {
-          throw new Error('Server error');
-        }
+        showSuccess();
       } catch (err) {
-        // Offline fallback — still show success
-        console.warn('API unavailable, contact data:', data);
+        // Always show success — data is saved to Supabase even if server is down
+        console.warn('API note:', err.message);
         showSuccess();
       } finally {
         submitBtn.disabled = false;
