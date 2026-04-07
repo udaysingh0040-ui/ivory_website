@@ -1052,6 +1052,202 @@
       margin-top: 4px;
       display: none;
     }
+
+    /* ── QUICK-VIEW MODAL ──────────────────────────────── */
+    .qv-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(19,17,17,0.55);
+      z-index: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(3px);
+    }
+    .qv-backdrop.active { opacity: 1; pointer-events: all; }
+
+    .qv-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -44%) scale(0.97);
+      z-index: 810;
+      width: min(860px, 94vw);
+      max-height: 90vh;
+      background: var(--ivory-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+      overflow: hidden;
+    }
+    .qv-modal.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .qv-img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--alabaster);
+      overflow: hidden;
+    }
+    .qv-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .qv-body {
+      padding: 36px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+
+    .qv-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      background: var(--ivory-white);
+      border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 820;
+      transition: background 0.2s ease;
+    }
+    .qv-close:hover { background: var(--alabaster); }
+
+    .qv-category {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+    }
+
+    .qv-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+    }
+
+    .qv-price {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .qv-price__inr {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    .qv-price__usd {
+      font-size: 12px;
+      color: rgba(19,17,17,0.45);
+    }
+
+    .qv-divider {
+      height: 1px;
+      background: rgba(19,17,17,0.08);
+    }
+
+    .qv-fabric-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      margin-bottom: 10px;
+    }
+
+    .qv-fabric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    .qv-fabric-item { display: flex; flex-direction: column; gap: 2px; }
+    .qv-fabric-item__label {
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.35);
+    }
+    .qv-fabric-item__value {
+      font-size: 12.5px;
+      color: rgba(19,17,17,0.8);
+    }
+
+    .qv-sizes-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.38);
+      margin-bottom: 10px;
+    }
+    .qv-sizes-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .qv-size-btn {
+      min-width: 44px;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid rgba(19,17,17,0.18);
+      background: transparent;
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .qv-size-btn:hover { border-color: var(--ebony); }
+    .qv-size-btn.selected { background: var(--ebony); color: var(--ivory-white); border-color: var(--ebony); }
+
+    .qv-atc-btn {
+      width: 100%;
+      background: var(--ebony);
+      color: var(--ivory-white);
+      border: none;
+      padding: 16px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s ease, opacity 0.2s ease;
+      margin-top: auto;
+    }
+    .qv-atc-btn:hover { background: #1f1c1c; }
+    .qv-atc-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .qv-soldout-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(19,17,17,0.45);
+      border: 1px solid rgba(19,17,17,0.15);
+      padding: 6px 14px;
+    }
+
+    @media (max-width: 640px) {
+      .qv-modal { grid-template-columns: 1fr; width: 96vw; max-height: 95vh; }
+      .qv-img-wrap { aspect-ratio: 4/3; }
+      .qv-body { padding: 24px 20px; }
+    }
   </style>
 </head>
 <body>
@@ -1096,6 +1292,43 @@
   </div>
 
   <!-- ─── PAGE HEADER ──────────────────────────────── -->
+  <!-- ─── QUICK-VIEW MODAL ────────────────────────────── -->
+  <div class="qv-backdrop" id="qv-backdrop"></div>
+  <div class="qv-modal" id="qv-modal" role="dialog" aria-modal="true">
+    <button class="qv-close" id="qv-close" aria-label="Close">✕</button>
+    <div class="qv-img-wrap">
+      <img class="qv-img" id="qv-img" src="" alt="">
+    </div>
+    <div class="qv-body">
+      <div>
+        <div class="qv-category" id="qv-category"></div>
+        <h2 class="qv-name" id="qv-name"></h2>
+      </div>
+      <div class="qv-price">
+        <span class="qv-price__inr" id="qv-price-inr"></span>
+        <span class="qv-price__usd" id="qv-price-usd"></span>
+      </div>
+      <div class="qv-divider"></div>
+      <div id="qv-desc-section" style="display:none">
+        <p id="qv-desc" style="font-size:13px;line-height:1.85;color:rgba(19,17,17,0.7);font-family:'Raleway',sans-serif;font-weight:300;"></p>
+      </div>
+      <div class="qv-divider"></div>
+      <div id="qv-fabric-section">
+        <div class="qv-fabric-title">Fabric Details</div>
+        <div class="qv-fabric-grid" id="qv-fabric-grid"></div>
+      </div>
+      <div class="qv-divider"></div>
+      <div id="qv-sizes-section" style="display:none">
+        <div class="qv-sizes-title">Select Size</div>
+        <div class="qv-sizes-row" id="qv-sizes-row"></div>
+      </div>
+      <div id="qv-soldout-section" style="display:none">
+        <span class="qv-soldout-badge">Sold Out</span>
+      </div>
+      <button class="qv-atc-btn" id="qv-atc-btn">Add to Cart →</button>
+    </div>
+  </div>
+
   <div class="page-header">
     <div class="page-header__inner">
       <h1 class="page-header__title">IVORY <em>Catalogue</em></h1>
@@ -1365,6 +1598,208 @@
       });
     });
 
+    /* ── QUICK-VIEW MODAL ────────────────────────────────── */
+    const PRODUCT_DESCRIPTIONS = {
+      mu1: `140 GSM single-ply Indian cotton, double-reinforced seams, mother-of-pearl buttons hand-stitched throughout. Slim-to-regular cut with a single back box pleat. Wear it under a suit or open at dinner. It becomes the occasion.`,
+
+      mu2: `130 GSM cotton with a subtle texture. Sleeve hits two inches above the elbow — the most universally flattering length. Soft camp-style collar, hidden flat placket, relaxed-regular body. Your composed warm-weather uniform from nine to nine.`,
+
+      mu3: `155 GSM European long-staple linen applied to formal tailoring. Semi-spread collar takes a tie knot or wears open with equal intention. Natural horn buttons, extra-wide barrel cuffs. It will crease through the day — beautifully, softly, intentionally.`,
+
+      mu4: `180 GSM single-jersey — heavy enough for genuine opacity, light enough for all-day comfort. Shoulder seam sits exactly on the bone. Dense crew neck holds its shape wash after wash. Does not try to be noticed. Always is.`,
+
+      mu5: `135 GSM cotton with a gentle slub texture that gives white real depth. Cuban camp collar, hidden placket, dropped-shoulder silhouette. For places where you want to look like you dressed with intention but didn't have to try.`,
+
+      mu6: `145 GSM linen, enzyme-washed before it reaches you — immediately soft, worn-in from the first wearing. Oversized through the torso, long straight hem, soft wide-spread collar. The right shade of white, the right amount of nothing.`,
+
+      mu7: `140 GSM plain-weave linen, smart enough for a workplace. Sleeve hits three inches above the elbow. Lightly interfaced structured spread collar holds shape through humidity. Dressy without being suited. Tuck it in. Make it work.`,
+
+      mu8: `150 GSM stone-washed linen with a subtle dobby texture. Wider sleeve opening, deeper armhole — invisible on a hanger, immediately felt when worn. Lighter collar interlining relaxes naturally with wear. This shirt learns from experience. So do you.`,
+
+      mb1: `220 GSM cotton twill, pre-washed. Two forward pleats done correctly — they add elegance, not bulk. Straight leg with a gentle taper through the knee. Pockets deep enough to hold a phone. The anchor of any serious wardrobe.`,
+
+      mb2: `200 GSM cotton-linen blend. Medium-high rise, elasticated back for comfort, clean-faced front. Generous through the upper thigh, tapering cleanly to just above the ankle. Intentional volume, never accidental. Pair with the Relaxed Linen Shirt and white sneakers.`,
+
+      mb3: `175 GSM European linen, the intelligence of heat-ready fabric in a formal cut. Medium-high rise, single forward pleat, horn-button fly, two welt pockets. Linen creases through the day — softly, naturally. It wears better as the hours pass.`,
+
+      mb4: `70/30 linen-cotton at 160 GSM. Medium rise, no pleats, straight through hip and thigh. A subtle taper below the knee tucks cleanly into a shoe. Pair with every shirt in the collection. The glue that holds a wardrobe together.`,
+
+      wu1: `130 GSM Egyptian-origin cotton poplin — smooth, cool, with a slight sheen. Long-line A-line silhouette, pointed spread collar, mother-of-pearl buttons. Hemline at the upper thigh — works as a top or a dress. One change of shoes, any occasion.`,
+
+      wu2: `125 GSM cotton, light enough to breathe, tight enough to stay opaque. Sleeve hits mid-upper arm. Soft camp collar keeps the throat cool. Boxy-relaxed hem just below the hip. Wear it untucked, half-tucked, or tied. However you feel.`,
+
+      wu3: `140 GSM cotton with a slub texture that gives white real visual depth. Genuinely oversized, intentionally so. Long curved hem with side splits. Wide camp collar, elegant at any degree of buttoning. At its best when it is wearing you.`,
+
+      wu4: `145 GSM shirting poplin, 100/2 yarn count — exceptional smoothness, a very slight lustre. Medium point spread collar with a 35mm stand. Hidden underarm placket. Long enough to stay tucked all day. Wear it with everything. It improves everything.`,
+
+      wu5: `130 GSM fine-gauge linen woven in Tamil Nadu exclusively for IVORY — maximises air circulation, holds crispness in humidity. Mid-upper arm sleeve, generous armhole. Soft camp collar. Relaxed boxy body. In white linen, this is not just summer clothing. It is summer philosophy.`,
+
+      wu6: `150 GSM plain-weave linen, enzyme-washed to immediate softness. Precise shoulder placement, subtle A-line shaping, medium-spread pointed collar. The shirt for places where being underestimated is not an option. Pair with Palazzo Linen Pants for the full statement.`,
+
+      wu7: `170 GSM single-jersey recut for the female form — not scaled down, reconceived. Curved hem longer at the back. Side seams set forward so it never twists. Wide crew neck. Slightly dropped shoulder. Pair with Palazzo Linen Pants for a complete white moment.`,
+
+      wb1: `220 GSM cotton twill, high rise, two back shaping darts, slanted front pockets, concealed zip. Straight leg from hip to floor. Tuck in the Cotton Classic Shirt. This is the most powerful outfit in the IVORY collection.`,
+
+      wb2: `200 GSM linen-cotton blend. High rise, genuinely wide from hip to floor — a clean column, not tapered, not flared. The width creates the movement and the presence. Elasticated back, clean-faced front. Pair with the Premium White T-Shirt tucked in.`,
+
+      wb3: `165 GSM plain-weave linen with a brushed matte finish. Medium-high rise, flat front, shaping through two back darts only. Genuinely straight leg — the hardest cut to execute correctly, the best when done right. Hem just above the ankle. Correct.`,
+
+      wb4: `155 GSM open-weave linen on traditional Tamil Nadu looms — lighter, more fluid than any other cloth in the range. High rise, structured waistband, two decorative front pleats. Widens from hip to ankle. In motion, genuinely beautiful. For women unafraid to occupy space.`,
+
+      tw1: `420 GSM Turkish long-staple cotton terry, 100 x 180 cm. Long-staple fibre gets more plush with every wash. 8mm loop pile, mitred corners, lockstitch hem. In IVORY white — the cleanest and most indulgent thing you can own.`,
+
+      tw2: `380 GSM Indian Malkha cotton terry, 70 x 140 cm. Handspun, Deccan-origin cotton that develops organic softness through washing. 7mm pile — optimal for the humid Indian climate. Subtle dobby border pattern. The standard by which other towels are measured.`,
+
+      tw3: `300 GSM terry loop, 40 x 70 cm. 6mm pile in a Turkish figure-eight weave that prevents loop degradation. Chain-stitch hem, hand-mitred corners, open-weave decorative border. Provide this to your guests. They will notice — and they will remember.`,
+
+      tw4: `280 GSM fine-count long-staple cotton, 30 x 30 cm. 5mm pile — plush yet gently exfoliating. Overlock-stitched hem so no raw fibre touches your face. Rounded corners. Buy six. Rotate through the week. They get softer with every wash.`,
+
+      tw5: `450 GSM cut-pile terry, 50 x 80 cm — the highest weight in the collection. Cut pile produces a dense, velvety surface softer than any loop pile. 15mm pile cushions the foot. Grid-pattern latex backing prevents slipping without trapping moisture. Notice the difference every day.`
+    };
+
+    /* ── FABRIC_DETAILS (per product) ───────────────────── */
+    const FABRIC_DETAILS = {
+      mu1: { Fabric: 'Fine Cotton Poplin', Weave: 'Tight Plain Weave', Weight: '140 GSM', Feel: 'Crisp, smooth, breathable', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu2: { Fabric: 'Soft Cotton Shirting', Weave: 'Plain Weave', Weight: '130 GSM', Feel: 'Light, airy, stays fresh', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu3: { Fabric: 'Long-Staple Flax Linen', Weave: 'Plain Weave', Weight: '155 GSM', Feel: 'Cool, structured, gets softer with wear', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu4: { Fabric: 'Heavyweight Cotton Jersey', Weave: 'Single Jersey Knit', Weight: '180 GSM', Feel: 'Thick, opaque, soft against skin', Care: 'Machine wash 30°C, tumble dry low', Made: 'Handcrafted in India' },
+      mu5: { Fabric: 'Cotton Slub', Weave: 'Textured Plain Weave', Weight: '135 GSM', Feel: 'Relaxed, slightly textured, worn-in softness', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu6: { Fabric: 'Enzyme-Washed Linen', Weave: 'Plain Weave', Weight: '145 GSM', Feel: 'Immediately soft, breathes in heat', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu7: { Fabric: 'Pure Linen Shirting', Weave: 'Plain Weave', Weight: '140 GSM', Feel: 'Clean, cool, naturally crisp', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mu8: { Fabric: 'Stone-Washed Linen Dobby', Weave: 'Dobby Weave', Weight: '150 GSM', Feel: 'Soft, subtly textured, relaxed drape', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+
+      mb1: { Fabric: 'Cotton Twill', Weave: 'Diagonal Twill Weave', Weight: '220 GSM', Feel: 'Sturdy, holds a crease, drapes well', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mb2: { Fabric: 'Cotton & Linen Blend', Weave: 'Plain Weave', Weight: '200 GSM', Feel: 'Structured yet breathable, fluid in motion', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mb3: { Fabric: 'Pure Linen Suiting', Weave: 'Plain Weave', Weight: '175 GSM', Feel: 'Formal weight, breathes at 40°C+', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      mb4: { Fabric: '70% Linen, 30% Cotton', Weave: 'Plain Weave', Weight: '160 GSM', Feel: 'Soft drape, minimal creasing, very comfortable', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+
+      wu1: { Fabric: 'Fine Cotton Poplin', Weave: 'Tight Plain Weave', Weight: '130 GSM', Feel: 'Smooth, cool, with a soft sheen', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu2: { Fabric: 'Lightweight Cotton Shirting', Weave: 'Plain Weave', Weight: '125 GSM', Feel: 'Featherlight, breathable, stays opaque', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu3: { Fabric: 'Cotton Slub', Weave: 'Textured Plain Weave', Weight: '140 GSM', Feel: 'Effortlessly soft, natural texture, relaxed', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu4: { Fabric: 'Fine Cotton Poplin', Weave: 'Tight Plain Weave', Weight: '145 GSM', Feel: 'Smooth, crisp, clean finish', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu5: { Fabric: 'Open-Weave Linen', Weave: 'Loose Plain Weave', Weight: '130 GSM', Feel: 'Maximum airflow, stays cool all day', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu6: { Fabric: 'Enzyme-Washed Linen', Weave: 'Plain Weave', Weight: '150 GSM', Feel: 'Soft from first wear, cool and composed', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wu7: { Fabric: 'Heavyweight Cotton Jersey', Weave: 'Single Jersey Knit', Weight: '170 GSM', Feel: 'Dense, opaque, smooth against skin', Care: 'Machine wash 30°C, tumble dry low', Made: 'Handcrafted in India' },
+
+      wb1: { Fabric: 'Cotton Twill', Weave: 'Diagonal Twill Weave', Weight: '220 GSM', Feel: 'Substantial, holds shape, sharp crease', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wb2: { Fabric: 'Linen & Cotton Blend', Weave: 'Plain Weave', Weight: '200 GSM', Feel: 'Flows in motion, holds structure at rest', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wb3: { Fabric: 'Brushed Pure Linen', Weave: 'Plain Weave', Weight: '165 GSM', Feel: 'Matte, soft-focus, natural drape', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+      wb4: { Fabric: 'Fluid Open-Weave Linen', Weave: 'Loose Plain Weave', Weight: '155 GSM', Feel: 'Extremely light, flows beautifully in motion', Care: 'Cold wash, hang dry', Made: 'Handcrafted in India' },
+
+      tw1: { Fabric: 'Long-Staple Cotton Terry', Weave: 'Loop Pile, 8mm', Weight: '420 GSM', Feel: 'Hotel-grade plush, gets softer each wash', Care: 'Machine wash 40°C, tumble dry low', Made: 'Handcrafted in India' },
+      tw2: { Fabric: 'Malkha Handspun Cotton', Weave: 'Loop Pile, 7mm', Weight: '380 GSM', Feel: 'Organic softness, deeply absorbent', Care: 'Machine wash 40°C, tumble dry low', Made: 'Handcrafted in India' },
+      tw3: { Fabric: 'Cotton Terry', Weave: 'Loop Pile, 6mm', Weight: '300 GSM', Feel: 'Quick-dry, fresh between uses', Care: 'Machine wash 40°C, tumble dry low', Made: 'Handcrafted in India' },
+      tw4: { Fabric: 'Fine-Count Cotton Terry', Weave: 'Loop Pile, 5mm', Weight: '280 GSM', Feel: 'Gentle exfoliation, soft on facial skin', Care: 'Machine wash 40°C, tumble dry low', Made: 'Handcrafted in India' },
+      tw5: { Fabric: 'Cotton Cut-Pile Terry', Weave: 'Cut Pile, 15mm', Weight: '450 GSM', Feel: 'Velvety underfoot, cushioned and absorbent', Care: 'Machine wash 40°C, tumble dry low', Made: 'Handcrafted in India' },
+    };
+
+    let qvProduct = null;
+
+    function openQuickView(product) {
+      qvProduct = product;
+
+      // Populate image & name
+      document.getElementById('qv-img').src  = product.photo;
+      document.getElementById('qv-img').alt  = product.name;
+      document.getElementById('qv-name').textContent = product.name;
+      document.getElementById('qv-price-inr').textContent = fmt(product.inr);
+      document.getElementById('qv-price-usd').textContent = fmtUSD(product.usd);
+
+      // Category label
+      const catLabel = product.category === 'towels' ? 'Towels'
+        : (product.category === 'men' ? 'Men' : 'Women') + ' — ' + (product.subcategory === 'upper' ? 'Upper Wear' : 'Lower Wear');
+      document.getElementById('qv-category').textContent = catLabel;
+
+      // Fabric details
+      const fabricData = FABRIC_DETAILS[product.id] || {};
+      document.getElementById('qv-fabric-grid').innerHTML = Object.entries(fabricData)
+        .map(([k, v]) => `<div class="qv-fabric-item"><span class="qv-fabric-item__label">${k}</span><span class="qv-fabric-item__value">${v}</span></div>`)
+        .join('');
+
+      // Sizes
+      const sizesSection = document.getElementById('qv-sizes-section');
+      const soldoutSection = document.getElementById('qv-soldout-section');
+      const atcBtn = document.getElementById('qv-atc-btn');
+      const sizesRow = document.getElementById('qv-sizes-row');
+
+      if (product.in_stock === false) {
+        sizesSection.style.display = 'none';
+        soldoutSection.style.display = 'block';
+        atcBtn.disabled = true;
+        atcBtn.textContent = 'Sold Out';
+      } else if (product.sizes && product.sizes.length > 0) {
+        sizesSection.style.display = 'block';
+        soldoutSection.style.display = 'none';
+        atcBtn.disabled = false;
+        atcBtn.textContent = 'Add to Cart →';
+        sizesRow.innerHTML = product.sizes.map(s =>
+          `<button class="qv-size-btn" data-size="${s}">${s}</button>`
+        ).join('');
+        sizesRow.querySelectorAll('.qv-size-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            sizesRow.querySelectorAll('.qv-size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+          });
+        });
+      } else {
+        sizesSection.style.display = 'none';
+        soldoutSection.style.display = 'none';
+        atcBtn.disabled = false;
+        atcBtn.textContent = 'Add to Cart →';
+      }
+
+      // Product description
+      const desc = PRODUCT_DESCRIPTIONS[product.id];
+      const descSection = document.getElementById('qv-desc-section');
+      if (desc) {
+        document.getElementById('qv-desc').textContent = desc;
+        descSection.style.display = 'block';
+      } else {
+        descSection.style.display = 'none';
+      }
+
+      document.getElementById('qv-backdrop').classList.add('active');
+      document.getElementById('qv-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuickView() {
+      document.getElementById('qv-backdrop').classList.remove('active');
+      document.getElementById('qv-modal').classList.remove('active');
+      document.body.style.overflow = '';
+      qvProduct = null;
+    }
+
+    document.getElementById('qv-close').addEventListener('click', closeQuickView);
+    document.getElementById('qv-backdrop').addEventListener('click', closeQuickView);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuickView(); });
+
+    // Quick-view Add to Cart button
+    document.getElementById('qv-atc-btn').addEventListener('click', () => {
+      if (!qvProduct) return;
+      const atcBtn = document.getElementById('qv-atc-btn');
+
+      let size = null;
+      if (qvProduct.sizes && qvProduct.sizes.length > 0) {
+        const selectedBtn = document.querySelector('#qv-sizes-row .qv-size-btn.selected');
+        if (!selectedBtn) {
+          atcBtn.textContent = 'Select a size first';
+          setTimeout(() => { atcBtn.textContent = 'Add to Cart →'; }, 1200);
+          return;
+        }
+        size = selectedBtn.dataset.size;
+      }
+
+      addToCart(qvProduct, size);
+      atcBtn.textContent = '✓ Added to Cart!';
+      atcBtn.style.background = '#2d6a4f';
+      setTimeout(() => {
+        atcBtn.textContent = 'Add to Cart →';
+        atcBtn.style.background = '';
+        closeQuickView();
+      }, 1200);
+    });
+
     /* ── SIZE SELECTION & ADD TO CART ────────────────────── */
     document.getElementById('product-grid').addEventListener('click', e => {
 
@@ -1374,6 +1809,22 @@
         const productId = sizeBtn.dataset.product;
         document.querySelectorAll(`#sizes-${productId} .size-btn`).forEach(b => b.classList.remove('selected'));
         sizeBtn.classList.add('selected');
+        return;
+      }
+
+      // Product card click → open quick-view (but not when clicking overlay buttons)
+      const card = e.target.closest('.product-card');
+      if (card && !e.target.closest('.atc-btn') && !e.target.closest('.size-btn')) {
+        const productId = card.dataset.productId;
+        const allProducts = [
+          ...catalogue.men.upper.map(p => ({...p, category:'men', subcategory:'upper'})),
+          ...catalogue.men.bottom.map(p => ({...p, category:'men', subcategory:'bottom'})),
+          ...catalogue.women.upper.map(p => ({...p, category:'women', subcategory:'upper'})),
+          ...catalogue.women.bottom.map(p => ({...p, category:'women', subcategory:'bottom'})),
+          ...catalogue.towels.map(p => ({...p, category:'towels', subcategory:''})),
+        ];
+        const product = allProducts.find(p => p.id === productId);
+        if (product) openQuickView(product);
         return;
       }
 
